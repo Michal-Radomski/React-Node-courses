@@ -1,0 +1,16 @@
+{
+  "name": "01-internals",
+  "version": "1.0.0",
+  "description": "Advanced Node Course",
+  "scripts": {
+    "start": "clear && ts-node threads.ts",
+    "start2": "clear && ts-node async.ts",
+    "start3": "clear && ts-node multiTask.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.4.5"
+  }
+}
