@@ -95,3 +95,14 @@ http
   .listen(3000);
 
 console.log("server is listening on port 3000");
+
+//* Example of setImmediate in TypeScript
+(function example(): void {
+  console.log("Start");
+
+  setImmediate(() => {
+    console.log("Executed in setImmediate callback");
+  });
+
+  console.log("End");
+})();
