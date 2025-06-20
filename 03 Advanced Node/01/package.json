@@ -6,11 +6,18 @@
   "scripts": {
     "start": "nodemon index.ts",
     "start2": "nodemon index2.ts",
-    "start3": "nodemon index3.ts"
+    "start3": "nodemon index3.ts",
+    "start4": "nodemon index4.ts"
   },
   "keywords": [],
   "author": "Michal Radomski <michalra@op.pl>",
   "license": "MIT",
   "type": "commonjs",
-  "dependencies": {}
+  "dependencies": {
+    "stream-chain": "^3.4.0",
+    "stream-json": "^1.9.1"
+  },
+  "devDependencies": {
+    "@types/stream-json": "^1.7.8"
+  }
 }
