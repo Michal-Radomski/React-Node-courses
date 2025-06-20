@@ -20,6 +20,6 @@
     // "sourceMap": true,
     // "outDir": "dist"
   },
-  "include": ["./**/*.ts"],
+  "include": ["./**/*.ts", "summation.js"],
   "exclude": ["node_modules"]
 }
