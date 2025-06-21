@@ -11,6 +11,7 @@ if (error) {
 const config = {
   port: envVars.PORT,
   dbConnection: envVars.DB_CONNECTION,
+  env: envVars.NODE_ENV,
 };
 
 export default config;
