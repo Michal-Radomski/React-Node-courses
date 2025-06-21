@@ -2,7 +2,7 @@ import { Request, RequestHandler, Response } from "express";
 
 import Blog from "../models/blog.model";
 
-export const createBlog: RequestHandler = async (req: Request, res: Response) => {
+export const createBlog: RequestHandler = async (req: Request, res: Response): Promise<void> => {
   try {
     await Blog.create(req.body);
     res.send({ success: true, message: "Blog created successfully" });
@@ -13,7 +13,8 @@ export const createBlog: RequestHandler = async (req: Request, res: Response) =>
   }
 };
 
-export const getBlogs: RequestHandler = async (req: Request, res: Response) => {
+export const getBlogs: RequestHandler = async (req: Request, res: Response): Promise<void> => {
+  console.log("req.ip:", req.ip);
   try {
     const blogs = await Blog.find({});
     res.json(blogs);
