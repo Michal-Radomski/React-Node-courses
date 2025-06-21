@@ -7,8 +7,10 @@ import bodyParser from "body-parser";
 import helmet from "helmet";
 import morgan from "morgan";
 import compression from "compression";
-import * as dotenv from "dotenv";
-dotenv.config();
+// import * as dotenv from "dotenv";
+// dotenv.config();
+
+import config from "./config/config";
 
 //* Import routes
 import blogRouter from "./routes/blog.route";
@@ -46,7 +48,8 @@ app.use(blogRouter);
 //* Mongo DB
 mongoose.set("strictQuery", true);
 mongoose
-  .connect(process.env.MONGO_URL as string, {})
+  // .connect(process.env.DB_CONNECTION as string, {})
+  .connect(config.dbConnection, {})
   .then((con: { connection: { host: string } }) => {
     console.log(`MongoDB Database connected with HOST: ${con.connection.host}`);
   })
@@ -63,7 +66,8 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 //* Port
-const portHTTP = (process.env.PORT || 5000) as number;
+// const portHTTP = (process.env.PORT || 5000) as number;
+const portHTTP = (config.port || 5000) as number;
 
 const httpServer = http.createServer(app);
 //* IPv4
