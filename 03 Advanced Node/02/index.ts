@@ -2,6 +2,11 @@ import path from "path";
 import http from "http";
 import express, { Express, Request, Response } from "express";
 import mongoose from "mongoose";
+import cors from "cors";
+import bodyParser from "body-parser";
+import helmet from "helmet";
+import morgan from "morgan";
+import compression from "compression";
 import * as dotenv from "dotenv";
 dotenv.config();
 
@@ -10,8 +15,30 @@ import blogRouter from "./routes/blog.route";
 
 const app: Express = express();
 
+const corsOptions = {
+  origin: true,
+  methods: ["POST", "GET", "OPTIONS", "PUT", "DELETE"],
+  preflightContinue: false,
+  optionsSuccessStatus: 200,
+  credentials: true,
+  allowedHeaders: ["Content-Type", "Authorization", "Accept"], // Specify
+};
+
 //* Middleware
-app.use(express.json());
+app.use(cors(corsOptions));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(morgan("combined"));
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+    crossOriginResourcePolicy: false,
+    crossOriginEmbedderPolicy: false,
+    crossOriginOpenerPolicy: false,
+  })
+);
+// Compress all responses
+app.use(compression({ level: 6 }));
 
 //* Route Middleware
 app.use(blogRouter);
