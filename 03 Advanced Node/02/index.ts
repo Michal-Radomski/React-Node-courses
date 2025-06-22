@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 
 import config from "./config/config";
 import app from "./server/server";
+import logger from "./config/logger";
 
 //* Mongo DB
 mongoose.set("strictQuery", true);
@@ -22,6 +23,7 @@ const httpServer = http.createServer(app);
 //* IPv4
 httpServer.listen({ port: portHTTP, host: "127.0.0.1" }, () => {
   console.log(`🚀 Server is listening at http://localhost:${portHTTP}`);
+  logger.info(`server listening on port ${config.port}`);
   // For testing only
   console.log("Current Time:", new Date().toLocaleTimeString());
 });
