@@ -1,8 +1,10 @@
 import { Request, RequestHandler, Response } from "express";
+import httpStatus from "http-status";
 
-import Blog, { BlogI } from "../models/blog.model";
 // import createBlogSchema from "../validations/blog.validation";
 import { catchAsync } from "../utils/catchAsync";
+import { createBlogService, getBlogsService } from "../services/blog.service";
+import { BlogI } from "../models/blog.model";
 
 //* V1
 // export const createBlog: RequestHandler = async (req: Request, res: Response): Promise<void> => {
@@ -35,12 +37,14 @@ import { catchAsync } from "../utils/catchAsync";
 
 //* V2
 export const createBlog: RequestHandler = catchAsync(async (req: Request, res: Response): Promise<void> => {
-  await Blog.create(req.body);
-  res.send({ success: true, message: "Blog created successfully" });
+  // await Blog.create(req.body);
+  await createBlogService(req.body);
+  res.status(httpStatus.CREATED).send({ success: true, message: "Blog created successfully" });
 });
 
 export const getBlogs: RequestHandler = catchAsync(async (req: Request, res: Response): Promise<void> => {
   console.log("req.ip:", req.ip);
-  const blogs = (await Blog.find({})) as BlogI[];
-  res.json(blogs);
+  // const blogs = (await Blog.find({})) as BlogI[];
+  const blogs = (await getBlogsService()) as BlogI[];
+  res.status(httpStatus.OK).json(blogs);
 });
