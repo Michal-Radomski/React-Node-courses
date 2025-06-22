@@ -40,7 +40,9 @@ export const errorHandler: ErrorRequestHandler = (
     message,
     ...(config.env === "development" && { stack: err.stack }),
   };
+
   res.locals.errorMessage = message;
+
   if (config.env === "development") {
     console.log(err);
   }
