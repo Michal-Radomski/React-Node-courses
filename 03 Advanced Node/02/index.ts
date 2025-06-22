@@ -11,8 +11,7 @@ import compression from "compression";
 // dotenv.config();
 
 import config from "./config/config";
-import { errorHandler } from "./middlewares/error";
-
+import { errorConverter, errorHandler } from "./middlewares/error";
 //* Import routes
 import blogRouter from "./routes/blog.route";
 
@@ -47,7 +46,8 @@ app.use(compression({ level: 6 }));
 app.use(blogRouter);
 
 //* Error Handler
-app.use(errorHandler);
+app.use(errorConverter); // Add the error converter before the error handler
+app.use(errorHandler); // Add the error handler
 
 //* Mongo DB
 mongoose.set("strictQuery", true);
