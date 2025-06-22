@@ -1,15 +1,15 @@
 import winston from "winston";
 
 const { format, createLogger, transports } = winston;
-const { combine, timestamp, printf } = format;
+const { printf, combine, timestamp, colorize, uncolorize } = format;
 
-const winstonFormat: winston.Logform.Format = printf(({ level, message, timestamp, stack }) => {
+const winstonFormat: winston.Logform.Format = printf(({ level, message, timestamp, stack }): string => {
   return `${timestamp}: ${level}: ${stack || message}`;
 });
 
 const logger: winston.Logger = createLogger({
-  level: "info",
-  format: combine(timestamp(), winstonFormat),
+  level: process.env.NODE_ENV === "development" ? "debug" : "info",
+  format: combine(timestamp(), winstonFormat, process.env.NODE_ENV === "development" ? colorize() : uncolorize()),
   transports: [new transports.Console()],
 });
 

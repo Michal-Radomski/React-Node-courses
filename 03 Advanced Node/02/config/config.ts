@@ -1,11 +1,12 @@
 import envVarSchema from "../validations/env.validation";
+import logger from "./logger";
 
 // Validating the environment variables against the schema
 const { value: envVars, error } = envVarSchema.validate(process.env);
 // console.log("envVars:", envVars);
 
 if (error) {
-  console.error(`Config validation error: ${error.message}`);
+  logger.error(`Config validation error: ${error.message}`);
 }
 
 const config = {

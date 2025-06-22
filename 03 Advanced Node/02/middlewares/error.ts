@@ -4,6 +4,7 @@ import httpStatus from "http-status";
 
 import config from "../config/config";
 import ApiError from "../utils/ApiError";
+import logger from "../config/logger";
 
 interface CustomError extends Error {
   isOperational: boolean;
@@ -44,7 +45,7 @@ export const errorHandler: ErrorRequestHandler = (
   res.locals.errorMessage = message;
 
   if (config.env === "development") {
-    console.log(err);
+    logger.error(err);
   }
   res.status(statusCode).send(response);
 };
