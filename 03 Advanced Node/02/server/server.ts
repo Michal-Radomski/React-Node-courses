@@ -3,9 +3,10 @@ import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import helmet from "helmet";
-import morgan from "morgan";
+// import morgan from "morgan";
 import compression from "compression";
 import httpStatus from "http-status";
+import morganMiddleware from "../config/morgan";
 
 import { errorConverter, errorHandler } from "../middlewares/error";
 import ApiError from "../utils/ApiError";
@@ -27,7 +28,9 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(morgan("combined"));
+// app.use(morgan("combined")); //* V1
+app.use(morganMiddleware.successHandler); //* V2
+app.use(morganMiddleware.errorHandler); //* V2
 app.use(
   helmet({
     contentSecurityPolicy: false,
