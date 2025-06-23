@@ -8,6 +8,6 @@ const blogRouter: Router = express.Router();
 
 blogRouter.get("/blogs", getBlogs);
 // blogRouter.post("/blog", createBlog);
-blogRouter.post("/blog", validate(createBlogSchema) as express.RequestHandler, createBlog);
+blogRouter.post("/blog", validate(createBlogSchema), createBlog);
 
 export default blogRouter;

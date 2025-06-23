@@ -12,6 +12,7 @@ import { errorConverter, errorHandler } from "../middlewares/error";
 import ApiError from "../utils/ApiError";
 //* Import routes
 import blogRouter from "../routes/blog.route";
+import authRouter from "../routes/auth.route";
 
 const app: Express = express();
 
@@ -44,6 +45,7 @@ app.use(compression({ level: 6 }));
 
 //* Route Middleware
 app.use(blogRouter);
+app.use(authRouter);
 
 //* Favicon
 app.get("/favicon.ico", (_req: Request, res: Response) => {

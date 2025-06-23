@@ -4,7 +4,7 @@ import joi from "joi";
 import ApiError from "../utils/ApiError";
 
 // Middleware function to validate the request against a schema
-const validate = (schema: { body: joi.ObjectSchema<any> }) => (req: Request, res: Response, next: NextFunction) => {
+const validate = (schema: { body: joi.ObjectSchema<any> }) => (req: Request, _res: Response, next: NextFunction) => {
   // Extract the keys from the schema
   const keys = Object.keys(schema);
   // console.log("keys:", keys);
