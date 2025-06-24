@@ -10,12 +10,12 @@ if (error) {
 }
 
 const config = {
-  port: envVars.PORT,
-  dbConnection: envVars.DB_CONNECTION,
-  env: envVars.NODE_ENV,
+  port: envVars.PORT as number,
+  dbConnection: envVars.DB_CONNECTION as string,
+  env: envVars.NODE_ENV as string,
   jwt: {
-    secret: envVars.JWT_SECRET,
-    accessExpirationMinutes: envVars.JWT_ACCESS_EXPIRATION_MINUTES,
+    secret: envVars.JWT_SECRET as string,
+    accessExpirationMinutes: envVars.JWT_EXPIRATION_MINUTES as number,
   },
 };
 
