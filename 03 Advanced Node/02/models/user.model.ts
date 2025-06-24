@@ -36,9 +36,9 @@ const userSchema = new Schema(
       trim: true,
       minlength: 8,
       validate(value: string) {
-        if (!validator.isStrongPassword(value)) {
+        if (!validator.isStrongPassword(value, { minLength: 10 })) {
           throw new Error(
-            "Password should contain at least one uppercase and lowercase letter, number and special character"
+            "Password should contain at least one uppercase and lowercase letter, number and special character, min 10 characters"
           );
         }
       },

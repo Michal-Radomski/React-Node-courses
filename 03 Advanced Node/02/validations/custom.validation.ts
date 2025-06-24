@@ -1,9 +1,13 @@
+import Joi, { CustomValidator, ErrorReport, LanguageMessages } from "joi";
 import validator from "validator";
 
-export const password = (value: string, helpers: { message: (arg0: string) => string }): string => {
-  if (!validator.isStrongPassword(value)) {
+export const password: CustomValidator<any, any> = (
+  value: string,
+  helpers: Joi.CustomHelpers<any>
+): ErrorReport | string => {
+  if (!validator.isStrongPassword(value, { minLength: 10 })) {
     return helpers.message(
-      "Password should be at least  8 characters with one uppercase and lowercase letter, number and special character"
+      "Password should be at least 10 characters with one uppercase and lowercase letter, number and special character" as unknown as LanguageMessages
     );
   }
   return value;
