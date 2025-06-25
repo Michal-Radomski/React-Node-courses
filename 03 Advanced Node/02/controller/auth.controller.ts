@@ -4,7 +4,7 @@ import httpStatus from "http-status";
 import { catchAsync } from "../utils/catchAsync";
 import { createUser } from "../services/user.service";
 import { UserI } from "../models/user.model";
-import { loginService } from "../services/auth.service";
+import { loginService, refreshAuthToken } from "../services/auth.service";
 import generateAuthTokens from "../services/token.service";
 
 export const register: RequestHandler = catchAsync(async (req: Request, res: Response): Promise<void> => {
@@ -25,4 +25,10 @@ export const login: RequestHandler = catchAsync(async (req: Request, res: Respon
   const tokens = await generateAuthTokens(user.id);
 
   res.status(httpStatus.OK).send({ user, tokens });
+});
+
+export const refreshToken: RequestHandler = catchAsync(async (req: Request, res: Response): Promise<void> => {
+  const tokens = await refreshAuthToken(req.body.refreshToken);
+
+  res.status(httpStatus.OK).send({ ...tokens });
 });

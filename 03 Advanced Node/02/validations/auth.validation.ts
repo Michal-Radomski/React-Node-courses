@@ -6,3 +6,9 @@ export const loginSchema = {
     password: Joi.string().required(),
   }),
 };
+
+export const refreshTokenSchema = {
+  body: Joi.object().keys({
+    refreshToken: Joi.string().required(),
+  }),
+};

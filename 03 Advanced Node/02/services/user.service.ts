@@ -13,6 +13,10 @@ export const createUser = async (userBody: { email: string }): Promise<UserI> =>
   return user;
 };
 
-export const getUserByEmail = async (email: string) => {
+export const getUserByEmail = async (email: string): Promise<UserI | null> => {
   return await User.findOne({ email });
+};
+
+export const getUserById = async (id: string): Promise<UserI | null> => {
+  return await User.findById(id);
 };
