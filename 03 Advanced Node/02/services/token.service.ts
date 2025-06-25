@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 
 import config from "../config/config";
 import { tokenTypes } from "../config/tokens";
+import Token, { TokenI } from "../models/token.model";
 
 // Function to generate a JWT for a given user ID
 // const generateAuthToken = (userId: string): string => {
@@ -20,7 +21,41 @@ import { tokenTypes } from "../config/tokens";
 
 // export default generateAuthToken;
 
-const generateToken = (userId: string, expires: dayjs.Dayjs, type: string, secret = config.jwt.secret): string => {
+const saveToken = async (
+  token: string,
+  userId: string,
+  expires: dayjs.Dayjs,
+  type: string,
+  blacklisted: boolean = false
+): Promise<TokenI> => {
+  const tokenDoc = (await Token.create({
+    token,
+    user: userId,
+    expires: expires.toDate(),
+    type,
+    blacklisted,
+  })) as TokenI;
+
+  return tokenDoc;
+};
+
+export const verifyToken = async (token: string, type: string): Promise<TokenI> => {
+  const payload = jwt.verify(token, config.jwt.secret);
+  const tokenDoc = (await Token.findOne({
+    token,
+    user: payload.sub,
+    type,
+    blacklisted: false,
+  })) as TokenI;
+
+  if (!tokenDoc) {
+    throw new Error("Token not found");
+  }
+
+  return tokenDoc;
+};
+
+export const generateToken = (userId: string, expires: dayjs.Dayjs, type: string, secret = config.jwt.secret): string => {
   const payload = {
     sub: userId,
     iat: dayjs().unix(),
@@ -30,12 +65,15 @@ const generateToken = (userId: string, expires: dayjs.Dayjs, type: string, secre
   return jwt.sign(payload, secret);
 };
 
-const generateAuthTokens = (userId: string) => {
+const generateAuthTokens = async (userId: string) => {
   const accessTokenExpires: dayjs.Dayjs = dayjs().add(Number(config.jwt.accessExpirationMinutes), "minutes");
   const accessToken: string = generateToken(userId, accessTokenExpires, tokenTypes.ACCESS);
 
   const refreshTokenExpires: dayjs.Dayjs = dayjs().add(Number(config.jwt.refreshExpirationDays), "days");
   const refreshToken: string = generateToken(userId, refreshTokenExpires, tokenTypes.REFRESH);
+
+  await saveToken(refreshToken, userId, refreshTokenExpires, tokenTypes.REFRESH);
+
   return {
     access: {
       token: accessToken,
