@@ -1,5 +1,5 @@
 import path from "path";
-import express, { Express, Request, Response } from "express";
+import express, { Express, NextFunction, Request, Response } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import helmet from "helmet";
@@ -7,12 +7,14 @@ import helmet from "helmet";
 import compression from "compression";
 import httpStatus from "http-status";
 import morganMiddleware from "../config/morgan";
+import passport from "passport";
 
 import { errorConverter, errorHandler } from "../middlewares/error";
 import ApiError from "../utils/ApiError";
 //* Import routes
 import blogRouter from "../routes/blog.route";
 import authRouter from "../routes/auth.route";
+import { jwtStrategy } from "../config/passport";
 
 const app: Express = express();
 
@@ -43,6 +45,10 @@ app.use(
 // Compress all responses
 app.use(compression({ level: 6 }));
 
+//* Passport
+app.use(passport.initialize());
+passport.use("jwt", jwtStrategy);
+
 //* Route Middleware
 app.use(blogRouter);
 app.use(authRouter);
@@ -56,6 +62,11 @@ app.get("/favicon.ico", (_req: Request, res: Response) => {
 app.get("/", (req: Request, res: Response) => {
   console.log("req.ip:", req.ip);
   res.send("<h1 style='color:blue;text-align:center'>API is running</h1>");
+});
+
+//* Path not found 404
+app.use((_req, _res, next: NextFunction) => {
+  next(new ApiError(httpStatus.NOT_FOUND, "Not found"));
 });
 
 //* Error Handler
