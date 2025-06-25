@@ -1,3 +1,4 @@
+import bcrypt from "bcryptjs";
 import mongoose, { Schema, Document, Model } from "mongoose";
 import validator from "validator";
 
@@ -5,6 +6,7 @@ export interface UserI extends Document {
   name: string;
   email: string;
   password: string;
+  isPasswordMatch(passport: string): Promise<boolean>;
 }
 
 interface IUserModel extends Model<UserI> {
@@ -52,6 +54,19 @@ const userSchema = new Schema(
 userSchema.statics.isEmailTaken = async function (email: string): Promise<boolean> {
   const user: UserI = await this.findOne({ email });
   return !!user;
+};
+
+userSchema.pre("save", async function (next) {
+  const user = this;
+  if (user.isModified("password")) {
+    user.password = await bcrypt.hash(user.password, 8);
+  }
+  next();
+});
+
+userSchema.methods.isPasswordMatch = async function (password: string): Promise<boolean> {
+  const user = this;
+  return await bcrypt.compare(password, user.password);
 };
 
 const User = mongoose.model<UserI, IUserModel>("User", userSchema);

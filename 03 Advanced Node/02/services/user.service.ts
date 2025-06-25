@@ -12,3 +12,7 @@ export const createUser = async (userBody: { email: string }): Promise<UserI> =>
   const user = (await User.create(userBody)) as UserI;
   return user;
 };
+
+export const getUserByEmail = async (email: string) => {
+  return await User.findOne({ email });
+};
