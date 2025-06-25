@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import mongoose, { Schema, Document, Model } from "mongoose";
 import validator from "validator";
+const toJson = require("@meanie/mongoose-to-json");
 
 export interface UserI extends Document {
   name: string;
@@ -44,12 +45,15 @@ const userSchema = new Schema(
           );
         }
       },
+      private: true,
     },
   },
   {
     timestamps: true,
   }
 );
+
+userSchema.plugin(toJson);
 
 userSchema.statics.isEmailTaken = async function (email: string): Promise<boolean> {
   const user: UserI = await this.findOne({ email });

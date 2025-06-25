@@ -16,6 +16,7 @@ const config = {
   jwt: {
     secret: envVars.JWT_SECRET as string,
     accessExpirationMinutes: envVars.JWT_EXPIRATION_MINUTES as number,
+    refreshExpirationDays: envVars.JWT_REFRESH_EXPIRATION_DAYS as number,
   },
 };
 
