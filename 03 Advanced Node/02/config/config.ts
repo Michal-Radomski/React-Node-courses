@@ -27,8 +27,8 @@ const config = {
     directives: {
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", "'unsafe-inline'"],
-      styleSrc: ["'self'", "unsafe-inline"],
-      fontSrc: ["'self'", "unsafe-inline"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      fontSrc: ["'self'", "'unsafe-inline'"],
     },
     reportOnly: true,
   },

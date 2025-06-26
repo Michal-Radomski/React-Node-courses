@@ -36,6 +36,7 @@ app.use(bodyParser.urlencoded({ extended: true, limit: "1kb" }));
 // app.use(morgan("combined")); //* V1
 app.use(morganMiddleware.successHandler); //* V2
 app.use(morganMiddleware.errorHandler); //* V2
+//* Security
 // app.use(
 //   helmet({
 //     contentSecurityPolicy: false,
@@ -45,9 +46,11 @@ app.use(morganMiddleware.errorHandler); //* V2
 //   })
 // ); //* V1
 app.use(helmet.contentSecurityPolicy(config.cspOptions)); //* V2
+// Set X-Frame-Options to SAMEORIGIN
+app.use(helmet.frameguard({ action: "sameorigin" }));
+app.use(helmet.noSniff());
 // Compress all responses
 app.use(compression({ level: 6 }));
-
 //* XSS
 const optionsXSS = {};
 app.use(xss(optionsXSS));
