@@ -21,17 +21,26 @@ import config from "../config/config";
 
 const app: Express = express();
 
-const corsOptions = {
-  origin: true,
-  methods: ["POST", "GET", "OPTIONS", "PUT", "DELETE"],
-  preflightContinue: false,
-  optionsSuccessStatus: 200,
-  credentials: true,
-  allowedHeaders: ["Content-Type", "Authorization", "Accept"], // Specify
-};
+// const corsOptions = {
+//   origin: true,
+//   methods: ["POST", "GET", "OPTIONS", "PUT", "DELETE"],
+//   preflightContinue: false,
+//   optionsSuccessStatus: 200,
+//   credentials: true,
+//   allowedHeaders: ["Content-Type", "Authorization", "Accept"], // Specify
+// };
 
 //* Middleware
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions)); //* V1
+//* V2
+if (config.env === "production") {
+  app.use(cors({ origin: "url" }));
+  app.options("*", cors({ origin: "url" })); //* Pass the CORS preflight response to the next handler
+} else {
+  // Enabling all cors
+  app.use(cors());
+  app.options("*", cors()); //* Pass the CORS preflight response to the next handler
+}
 app.use(bodyParser.json({ limit: "1kb" }));
 app.use(bodyParser.urlencoded({ extended: true, limit: "1kb" }));
 // app.use(morgan("combined")); //* V1
