@@ -12,3 +12,10 @@ export const password: CustomValidator<any, any> = (
   }
   return value;
 };
+
+export const objectId: CustomValidator<any, any> = (value, helpers) => {
+  if (!value.match(/^[1-9a-fA-F]{24}$/)) {
+    return helpers.message("'{{#label}}' must be a valid mongo id." as unknown as LanguageMessages);
+  }
+  return value;
+};

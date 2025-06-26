@@ -9,6 +9,7 @@ import httpStatus from "http-status";
 import morganMiddleware from "../config/morgan";
 import passport from "passport";
 const { xss } = require("express-xss-sanitizer");
+import mongoSanitize from "express-mongo-sanitize";
 
 import { errorConverter, errorHandler } from "../middlewares/error";
 import ApiError from "../utils/ApiError";
@@ -54,6 +55,7 @@ app.use(compression({ level: 6 }));
 //* XSS
 const optionsXSS = {};
 app.use(xss(optionsXSS));
+app.use(mongoSanitize());
 
 //* Passport
 app.use(passport.initialize());
