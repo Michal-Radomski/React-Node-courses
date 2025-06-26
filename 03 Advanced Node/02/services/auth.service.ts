@@ -14,32 +14,32 @@ export const loginService = async (email: string, password: string, ipAddr: stri
   //* Without copy error!
   const rateLimiterOptions = {
     storeClient: mongoose.connection,
-    blockDuration: 60 * 60 * 24,
+    blockDuration: 60 * 60 * 24, // 24h
     dbName: "blog_app",
   };
 
   const emailIpBruteLimiter = new RateLimiterMongo({
     ...rateLimiterOptions,
     points: config.rateLimiter.maxAttemptsByIpUsername,
-    duration: 60 * 10,
+    duration: 60 * 10, // 10 minutes
   });
 
   const slowerBruteLimiter = new RateLimiterMongo({
     ...rateLimiterOptions,
     points: config.rateLimiter.maxAttemptsPerDay,
-    duration: 60 * 60 * 24,
+    duration: 60 * 60 * 24, // 24h
   });
 
   const emailBruteLimiter = new RateLimiterMongo({
     ...rateLimiterOptions,
     points: config.rateLimiter.maxAttemptsPerEmail,
-    duration: 60 * 60 * 24,
+    duration: 60 * 60 * 24, // 24h
   });
 
   const promises = [slowerBruteLimiter.consume(ipAddr)] as Promise<RateLimiterRes>[];
   // console.log("promises:", promises);
 
-  const user = await getUserByEmail(email);
+  const user = (await getUserByEmail(email)) as UserI;
 
   if (!user || !(await user.isPasswordMatch(password))) {
     user && promises.push(emailIpBruteLimiter.consume(`${email}_${ipAddr}`), emailBruteLimiter.consume(email));

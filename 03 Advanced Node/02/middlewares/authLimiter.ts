@@ -8,26 +8,26 @@ import ApiError from "../utils/ApiError";
 
 const rateLimiterOptions = {
   storeClient: mongoose.connection,
-  blockDuration: 60 * 60 * 24,
+  blockDuration: 60 * 60 * 24, // 24h
   dbName: "blog_app",
 };
 
 const emailIpBruteLimiter = new RateLimiterMongo({
   ...rateLimiterOptions,
   points: config.rateLimiter.maxAttemptsByIpUsername,
-  duration: 60 * 10,
+  duration: 60 * 10, // 10 minutes
 });
 
 const slowerBruteLimiter = new RateLimiterMongo({
   ...rateLimiterOptions,
   points: config.rateLimiter.maxAttemptsPerDay,
-  duration: 60 * 60 * 24,
+  duration: 60 * 60 * 24, // 24h
 });
 
 const emailBruteLimiter = new RateLimiterMongo({
   ...rateLimiterOptions,
   points: config.rateLimiter.maxAttemptsPerEmail,
-  duration: 60 * 60 * 24,
+  duration: 60 * 60 * 24, // 24h
 });
 
 export const authLimiter = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
