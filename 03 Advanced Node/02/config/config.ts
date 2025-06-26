@@ -23,6 +23,15 @@ const config = {
     maxAttemptsByIpUsername: envVars.MAX_ATTEMPTS_BY_IP_USERNAME,
     maxAttemptsPerEmail: envVars.MAX_ATTEMPTS_PER_EMAIL,
   },
+  cspOptions: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      styleSrc: ["'self'", "unsafe-inline"],
+      fontSrc: ["'self'", "unsafe-inline"],
+    },
+    reportOnly: true,
+  },
 };
 
 export default config;

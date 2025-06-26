@@ -10,7 +10,7 @@ import { TokenI } from "../models/token.model";
 import { UserI } from "../models/user.model";
 import config from "../config/config";
 
-export const loginService = async (email: string, password: string, ipAddr: string) => {
+export const loginService = async (email: string, password: string, ipAddr: string): Promise<UserI> => {
   //* Without copy error!
   const rateLimiterOptions = {
     storeClient: mongoose.connection,

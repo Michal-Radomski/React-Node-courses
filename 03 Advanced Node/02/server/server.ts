@@ -8,6 +8,7 @@ import compression from "compression";
 import httpStatus from "http-status";
 import morganMiddleware from "../config/morgan";
 import passport from "passport";
+const { xss } = require("express-xss-sanitizer");
 
 import { errorConverter, errorHandler } from "../middlewares/error";
 import ApiError from "../utils/ApiError";
@@ -15,6 +16,7 @@ import ApiError from "../utils/ApiError";
 import blogRouter from "../routes/blog.route";
 import authRouter from "../routes/auth.route";
 import { jwtStrategy } from "../config/passport";
+import config from "../config/config";
 
 const app: Express = express();
 
@@ -29,21 +31,26 @@ const corsOptions = {
 
 //* Middleware
 app.use(cors(corsOptions));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: "1kb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "1kb" }));
 // app.use(morgan("combined")); //* V1
 app.use(morganMiddleware.successHandler); //* V2
 app.use(morganMiddleware.errorHandler); //* V2
-app.use(
-  helmet({
-    contentSecurityPolicy: false,
-    crossOriginResourcePolicy: false,
-    crossOriginEmbedderPolicy: false,
-    crossOriginOpenerPolicy: false,
-  })
-);
+// app.use(
+//   helmet({
+//     contentSecurityPolicy: false,
+//     crossOriginResourcePolicy: false,
+//     crossOriginEmbedderPolicy: false,
+//     crossOriginOpenerPolicy: false,
+//   })
+// ); //* V1
+app.use(helmet.contentSecurityPolicy(config.cspOptions)); //* V2
 // Compress all responses
 app.use(compression({ level: 6 }));
+
+//* XSS
+const optionsXSS = {};
+app.use(xss(optionsXSS));
 
 //* Passport
 app.use(passport.initialize());
