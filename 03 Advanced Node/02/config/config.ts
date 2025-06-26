@@ -18,6 +18,11 @@ const config = {
     accessExpirationMinutes: envVars.JWT_EXPIRATION_MINUTES as number,
     refreshExpirationDays: envVars.JWT_REFRESH_EXPIRATION_DAYS as number,
   },
+  rateLimiter: {
+    maxAttemptsPerDay: envVars.MAX_ATTEMPTS_PER_DAY,
+    maxAttemptsByIpUsername: envVars.MAX_ATTEMPTS_BY_IP_USERNAME,
+    maxAttemptsPerEmail: envVars.MAX_ATTEMPTS_PER_EMAIL,
+  },
 };
 
 export default config;

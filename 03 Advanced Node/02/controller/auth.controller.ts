@@ -19,10 +19,10 @@ export const register: RequestHandler = catchAsync(async (req: Request, res: Res
 
 export const login: RequestHandler = catchAsync(async (req: Request, res: Response): Promise<void> => {
   const { email, password } = req.body;
-  const user = await loginService(email, password);
+  const user: UserI = await loginService(email, password, req.connection.remoteAddress as string);
 
   // Generate token
-  const tokens = await generateAuthTokens(user.id);
+  const tokens = await generateAuthTokens(user.id as string);
 
   res.status(httpStatus.OK).send({ user, tokens });
 });
