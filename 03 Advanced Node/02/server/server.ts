@@ -65,6 +65,17 @@ app.use(compression({ level: 6 }));
 //* XSS
 const optionsXSS = {};
 app.use(xss(optionsXSS));
+
+//* Cannot assign to read only property 'query' of object '#<IncomingMessage>'
+app.use((req, _res, next) => {
+  Object.defineProperty(req, "query", {
+    ...Object.getOwnPropertyDescriptor(req, "query"),
+    value: req.query,
+    writable: true,
+  });
+
+  next();
+});
 app.use(mongoSanitize());
 
 //* Passport
