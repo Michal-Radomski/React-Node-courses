@@ -29,6 +29,7 @@ httpServer.listen({ port: portHTTP, host: "127.0.0.1" }, () => {
   logger.info("Current Time:", new Date().toLocaleTimeString());
 });
 
+// Todo: fix!
 // Object.keys(subscribers).forEach((eventName) => {
 //   // eslint-disable-next-line security/detect-object-injection
 //   EventEmitter.on(eventName, subscribers[eventName]);
