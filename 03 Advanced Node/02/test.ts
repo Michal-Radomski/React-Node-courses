@@ -2,6 +2,7 @@
 
 import safe from "safe-regex";
 
+// eslint-disable-next-line security/detect-unsafe-regex
 const regex: RegExp = /^([a-z]+.)+[A-Za-z]+$/;
 
 console.log("safe(regex):", safe(regex));

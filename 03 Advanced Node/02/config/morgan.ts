@@ -8,6 +8,7 @@ import config from "./config";
 morgan.token("message", (_req: Request, res: Response) => res.locals.errorMessage || "");
 const getIPFormat = () => (config.env === "production" ? ":remote-addr - " : "");
 
+// eslint-disable-next-line security/detect-non-literal-fs-filename
 const accessLogStream: fs.WriteStream = fs.createWriteStream(path.join(__dirname, "..", "logs/access.log"), { flags: "a" });
 
 const successResponseFormat: string = `${getIPFormat()} :method :url :status :response-time ms :user-agent :date`;

@@ -16,6 +16,7 @@ export const errorConverter = (err: CustomError, _req: Request, _res: Response, 
   if (!(error instanceof ApiError)) {
     const statusCode =
       error.statusCode || error instanceof mongoose.Error ? httpStatus.BAD_REQUEST : httpStatus.INTERNAL_SERVER_ERROR;
+    // eslint-disable-next-line security/detect-object-injection
     const message = error.message || httpStatus[statusCode];
     error = new ApiError(statusCode, message, false, error.stack);
   }
