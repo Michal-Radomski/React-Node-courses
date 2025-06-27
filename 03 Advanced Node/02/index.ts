@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 import config from "./config/config";
 import app from "./server/server";
 import logger from "./config/logger";
+// import subscribers from "./subscribers";
+// import EventEmitter from "./utils/EventEmitter";
 
 //* Mongo DB
 mongoose.set("strictQuery", true);
@@ -26,6 +28,11 @@ httpServer.listen({ port: portHTTP, host: "127.0.0.1" }, () => {
   // For testing only
   logger.info("Current Time:", new Date().toLocaleTimeString());
 });
+
+// Object.keys(subscribers).forEach((eventName) => {
+//   // eslint-disable-next-line security/detect-object-injection
+//   EventEmitter.on(eventName, subscribers[eventName]);
+// });
 
 const exitHandler = (): void => {
   if (httpServer) {

@@ -10,6 +10,8 @@ if (error) {
 }
 
 const config = {
+  email: envVars.EMAIL as string,
+  emailPassword: envVars.EMAIL_PASSWORD as string,
   port: envVars.PORT as number,
   dbConnection: envVars.DB_CONNECTION as string,
   env: envVars.NODE_ENV as string,
