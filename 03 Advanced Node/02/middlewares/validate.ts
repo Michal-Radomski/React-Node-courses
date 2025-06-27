@@ -4,6 +4,7 @@ import joi from "joi";
 import ApiError from "../utils/ApiError";
 
 // Middleware function to validate the request against a schema
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const validate = (schema: { body: joi.ObjectSchema<any> }) => (req: Request, _res: Response, next: NextFunction) => {
   // Extract the keys from the schema
   const keys = Object.keys(schema);

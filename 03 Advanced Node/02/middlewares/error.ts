@@ -22,12 +22,7 @@ export const errorConverter = (err: CustomError, _req: Request, _res: Response, 
   next(error);
 };
 
-export const errorHandler: ErrorRequestHandler = (
-  err: CustomError,
-  _req: Request,
-  res: Response,
-  _next: NextFunction
-): void => {
+export const errorHandler: ErrorRequestHandler = (err: CustomError, _req: Request, res: Response): void => {
   let { statusCode, message } = err;
 
   if (config.env === "production" && !err.isOperational) {

@@ -42,6 +42,7 @@ export const loginService = async (email: string, password: string, ipAddr: stri
   const user = (await getUserByEmail(email)) as UserI;
 
   if (!user || !(await user.isPasswordMatch(password))) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     user && promises.push(emailIpBruteLimiter.consume(`${email}_${ipAddr}`), emailBruteLimiter.consume(email));
     await Promise.all(promises);
     throw new ApiError(httpStatus.UNAUTHORIZED, "Incorrect email or password");
@@ -61,6 +62,7 @@ export const refreshAuthToken = async (refreshToken: string) => {
     await refreshTokenDoc.deleteOne();
     return generateAuthTokens(user.id);
   } catch (error) {
+    console.log("error:", error);
     throw new ApiError(httpStatus.UNAUTHORIZED, "Please authenticate");
   }
 };

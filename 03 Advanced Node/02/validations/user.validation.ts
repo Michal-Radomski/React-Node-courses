@@ -1,4 +1,4 @@
-import Joi, { CustomValidator } from "joi";
+import Joi from "joi";
 
 import { password } from "./custom.validation";
 

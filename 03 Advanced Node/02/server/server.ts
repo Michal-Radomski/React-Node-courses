@@ -8,6 +8,7 @@ import compression from "compression";
 import httpStatus from "http-status";
 import morganMiddleware from "../config/morgan";
 import passport from "passport";
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const { xss } = require("express-xss-sanitizer");
 import mongoSanitize from "express-mongo-sanitize";
 

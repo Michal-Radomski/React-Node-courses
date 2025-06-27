@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Joi, { CustomValidator, ErrorReport, LanguageMessages } from "joi";
 import validator from "validator";
 

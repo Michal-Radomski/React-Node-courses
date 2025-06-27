@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-this-alias */
 import bcrypt from "bcryptjs";
 import mongoose, { Schema, Document, Model } from "mongoose";
 import validator from "validator";
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const toJson = require("@meanie/mongoose-to-json");
 
 export interface UserI extends Document {
