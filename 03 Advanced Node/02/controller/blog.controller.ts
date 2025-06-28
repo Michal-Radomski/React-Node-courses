@@ -1,9 +1,10 @@
 import { Request, RequestHandler, Response } from "express";
 import httpStatus from "http-status";
+import { ReadStream } from "fs";
 
 // import createBlogSchema from "../validations/blog.validation";
 import { catchAsync } from "../utils/catchAsync";
-import { createBlogService, getBlogsService } from "../services/blog.service";
+import { createBlogService, getBlogsService, getReadableFileStream } from "../services/blog.service";
 import { BlogI } from "../models/blog.model";
 import ApiError from "../utils/ApiError";
 
@@ -55,4 +56,12 @@ export const uploadFile: RequestHandler = catchAsync(async (req: Request, res: R
     throw new ApiError(httpStatus.NOT_FOUND, "File not found");
   }
   res.status(httpStatus.OK).json({ filePath: `/uploads/${req.file.filename}` });
+});
+
+export const getFile = catchAsync(async (req: Request, res: Response): Promise<void> => {
+  const { filename } = req.params;
+  const stream: ReadStream = await getReadableFileStream(filename);
+  const contentType = `image/${filename.split(".")[1].toLowerCase()}`;
+  res.setHeader("Content-Type", contentType);
+  stream.pipe(res);
 });

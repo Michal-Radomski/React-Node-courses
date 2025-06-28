@@ -1,4 +1,5 @@
 import http from "http";
+import fs from "fs";
 import mongoose from "mongoose";
 
 import config from "./config/config";
@@ -34,6 +35,12 @@ httpServer.listen({ port: portHTTP, host: "127.0.0.1" }, () => {
 //   // eslint-disable-next-line security/detect-object-injection
 //   EventEmitter.on(eventName, subscribers[eventName]);
 // });
+
+fs.access("uploads", fs.constants.F_OK, async (err) => {
+  if (err) {
+    await fs.promises.mkdir("uploads");
+  }
+});
 
 const exitHandler = (): void => {
   if (httpServer) {

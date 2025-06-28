@@ -17,11 +17,16 @@ const storage: multer.StorageEngine = multer.diskStorage({
 
 const upload: multer.Multer = multer({
   storage,
-  fileFilter(_req, file, cb) {
+  fileFilter(req, file, cb) {
+    const maxFileSize = 3 * 1024 * 1024;
+
     if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-      return cb(new ApiError(httpStatus.BAD_REQUEST, "Only images are allowed") as unknown as null, false);
+      cb(new ApiError(httpStatus.BAD_REQUEST, "Only images are allowed") as unknown as null, false);
+    } else if (file.size > maxFileSize) {
+      cb(new ApiError(httpStatus.BAD_REQUEST, "File size should not exceed 3mb") as unknown as null, false);
+    } else {
+      cb(null, true);
     }
-    cb(null, true);
   },
 });
 
