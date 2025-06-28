@@ -1,8 +1,10 @@
-import mongoose, { models, Schema, Document } from "mongoose";
+import mongoose, { models, Schema, Document, ObjectId } from "mongoose";
 
 export interface BlogI extends Document {
   title: string;
   description: string;
+  coverImage: string;
+  createdBy: ObjectId | string;
 }
 
 const blogSchema = new Schema({
@@ -12,6 +14,14 @@ const blogSchema = new Schema({
   },
   description: {
     type: String,
+    required: true,
+  },
+  coverImage: {
+    type: String,
+  },
+  createdBy: {
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: "User",
     required: true,
   },
 });

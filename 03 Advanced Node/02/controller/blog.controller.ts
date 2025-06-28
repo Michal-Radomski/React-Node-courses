@@ -5,6 +5,7 @@ import httpStatus from "http-status";
 import { catchAsync } from "../utils/catchAsync";
 import { createBlogService, getBlogsService } from "../services/blog.service";
 import { BlogI } from "../models/blog.model";
+import ApiError from "../utils/ApiError";
 
 //* V1
 // export const createBlog: RequestHandler = async (req: Request, res: Response): Promise<void> => {
@@ -47,4 +48,11 @@ export const getBlogs: RequestHandler = catchAsync(async (req: Request, res: Res
   // const blogs = (await Blog.find({})) as BlogI[];
   const blogs = (await getBlogsService()) as BlogI[];
   res.status(httpStatus.OK).json(blogs);
+});
+
+export const uploadFile: RequestHandler = catchAsync(async (req: Request, res: Response): Promise<void> => {
+  if (!req.file) {
+    throw new ApiError(httpStatus.NOT_FOUND, "File not found");
+  }
+  res.status(httpStatus.OK).json({ filePath: `/uploads/${req.file.filename}` });
 });
