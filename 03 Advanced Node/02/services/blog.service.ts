@@ -1,6 +1,7 @@
 import { Request } from "express";
 import fs from "fs";
 import httpStatus from "http-status";
+import sharp from "sharp";
 
 import Blog, { BlogI } from "../models/blog.model";
 import ApiError from "../utils/ApiError";
@@ -25,4 +26,17 @@ export const getReadableFileStream = async (filename: string): Promise<fs.ReadSt
   // eslint-disable-next-line security/detect-non-literal-fs-filename
   const stream: fs.ReadStream = fs.createReadStream(filePath);
   return stream;
+};
+
+export const uploadFileService = async (file: { buffer: sharp.SharpOptions }): Promise<string> => {
+  const filename: string = `image-${Date.now()}.webp`;
+  const outputPath: string = `${__dirname}/../uploads/${filename}`;
+  sharp(file.buffer)
+    .resize(600)
+    .webp({
+      quality: 80,
+      // lossless: true,
+    })
+    .toFile(outputPath);
+  return filename;
 };

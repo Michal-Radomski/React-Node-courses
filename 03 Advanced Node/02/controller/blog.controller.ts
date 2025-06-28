@@ -1,10 +1,11 @@
 import { Request, RequestHandler, Response } from "express";
 import httpStatus from "http-status";
 import { ReadStream } from "fs";
+import sharp from "sharp";
 
 // import createBlogSchema from "../validations/blog.validation";
 import { catchAsync } from "../utils/catchAsync";
-import { createBlogService, getBlogsService, getReadableFileStream } from "../services/blog.service";
+import { createBlogService, getBlogsService, getReadableFileStream, uploadFileService } from "../services/blog.service";
 import { BlogI } from "../models/blog.model";
 import ApiError from "../utils/ApiError";
 
@@ -55,7 +56,10 @@ export const uploadFile: RequestHandler = catchAsync(async (req: Request, res: R
   if (!req.file) {
     throw new ApiError(httpStatus.NOT_FOUND, "File not found");
   }
-  res.status(httpStatus.OK).json({ filePath: `/uploads/${req.file.filename}` });
+  // res.status(httpStatus.OK).json({ filePath: `/uploads/${req.file.filename}` }); //* V1
+
+  const fileName: string = await uploadFileService(req.file as { buffer: sharp.SharpOptions }); //* V2
+  res.status(httpStatus.OK).json({ fileName });
 });
 
 export const getFile = catchAsync(async (req: Request, res: Response): Promise<void> => {
