@@ -1,13 +1,15 @@
 import { Request, RequestHandler, Response } from "express";
 import httpStatus from "http-status";
 import { ReadStream } from "fs";
-import sharp from "sharp";
+// import sharp from "sharp";
 
 // import createBlogSchema from "../validations/blog.validation";
 import { catchAsync } from "../utils/catchAsync";
-import { createBlogService, getBlogsService, getReadableFileStream, uploadFileService } from "../services/blog.service";
+import { createBlogService, getBlogsService, getReadableFileStream } from "../services/blog.service";
 import { BlogI } from "../models/blog.model";
 import ApiError from "../utils/ApiError";
+import { ImageProcessor } from "../background-tasks";
+import { start } from "../background-tasks/workers";
 
 //* V1
 // export const createBlog: RequestHandler = async (req: Request, res: Response): Promise<void> => {
@@ -58,7 +60,15 @@ export const uploadFile: RequestHandler = catchAsync(async (req: Request, res: R
   }
   // res.status(httpStatus.OK).json({ filePath: `/uploads/${req.file.filename}` }); //* V1
 
-  const fileName: string = await uploadFileService(req.file as { buffer: sharp.SharpOptions }); //* V2
+  // const fileName: string = await uploadFileService(req.file as { buffer: sharp.SharpOptions }); //* V2
+  // res.status(httpStatus.OK).json({ fileName });
+
+  const fileName: string = `image-${Date.now()}.webp`; //* V3
+  await ImageProcessor.Queue.add("ImageProcessorJob", {
+    fileName,
+    file: req.file,
+  });
+  await start();
   res.status(httpStatus.OK).json({ fileName });
 });
 

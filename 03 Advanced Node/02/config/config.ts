@@ -34,6 +34,11 @@ const config = {
     },
     reportOnly: true,
   },
+  redis: {
+    host: envVars.REDIS_HOST,
+    port: envVars.REDIS_PORT,
+    pass: envVars.REDIS_PASS,
+  },
 };
 
 export default config;
