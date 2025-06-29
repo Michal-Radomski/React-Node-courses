@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 import config from "./config/config";
 import app from "./server/server";
 import logger from "./config/logger";
+import { createWorker } from "./background-tasks/workers";
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const redisClient = require("./config/redis");
 
@@ -27,6 +28,15 @@ const redisClient = require("./config/redis");
     if (err) {
       await fs.promises.mkdir("uploads");
     }
+
+    const workers = [
+      { name: "ImageProcessor", filename: "image-processor.js" },
+      { name: "Cache", filename: "cache-processor.js" },
+    ];
+
+    workers.forEach(async (worker) => {
+      await createWorker(worker.name, worker.filename);
+    });
   });
 
   //* Port

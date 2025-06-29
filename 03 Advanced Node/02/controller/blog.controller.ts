@@ -9,6 +9,8 @@ import { createBlogService, getBlogsService, getReadableFileStream, getRecentBlo
 import { BlogI } from "../models/blog.model";
 import ApiError from "../utils/ApiError";
 import { ImageProcessor } from "../background-tasks";
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const redisClient = require("../config/redis");
 
 //* V1
 // export const createBlog: RequestHandler = async (req: Request, res: Response): Promise<void> => {
@@ -43,6 +45,7 @@ import { ImageProcessor } from "../background-tasks";
 export const createBlog: RequestHandler = catchAsync(async (req: Request, res: Response): Promise<void> => {
   // await Blog.create(req.body);
   await createBlogService(req.body);
+  await redisClient.del("recent-blogs");
   res.status(httpStatus.CREATED).send({ success: true, message: "Blog created successfully" });
 });
 
@@ -72,7 +75,7 @@ export const uploadFile: RequestHandler = catchAsync(async (req: Request, res: R
     fileName,
     file: req.file,
   });
-  await ImageProcessor?.startWorker();
+  // await ImageProcessor.startWorker();
   res.status(httpStatus.OK).json({ fileName });
 });
 

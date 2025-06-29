@@ -18,7 +18,7 @@ export const getRecentBlogsService = async (): Promise<BlogI[]> => {
     })
     .limit(10);
   await CacheProcessor.Queue.add("CacheJob", { blogs });
-  await CacheProcessor.startWorker();
+  // await CacheProcessor.startWorker();
   return blogs as BlogI[];
 };
 
