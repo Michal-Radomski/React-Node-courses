@@ -17,6 +17,8 @@ import ApiError from "../utils/ApiError";
 //* Import routes
 import blogRouter from "../routes/blog.route";
 import authRouter from "../routes/auth.route";
+import commentRouter from "../routes/comment.route";
+//* Other staff import
 import { jwtStrategy } from "../config/passport";
 import config from "../config/config";
 
@@ -85,6 +87,7 @@ passport.use("jwt", jwtStrategy);
 //* Route Middleware
 app.use(blogRouter);
 app.use(authRouter);
+app.use(commentRouter);
 
 //* Favicon
 app.get("/favicon.ico", (_req: Request, res: Response) => {
