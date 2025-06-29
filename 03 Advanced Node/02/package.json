@@ -7,6 +7,7 @@
     "start": "NODE_ENV=development nodemon index.ts",
     "start2": "nodemon test.ts",
     "start3": "nodemon test2.ts",
+    "start4": "nodemon test3.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
