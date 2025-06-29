@@ -5,11 +5,10 @@ import { ReadStream } from "fs";
 
 // import createBlogSchema from "../validations/blog.validation";
 import { catchAsync } from "../utils/catchAsync";
-import { createBlogService, getBlogsService, getReadableFileStream } from "../services/blog.service";
+import { createBlogService, getBlogsService, getReadableFileStream, getRecentBlogsService } from "../services/blog.service";
 import { BlogI } from "../models/blog.model";
 import ApiError from "../utils/ApiError";
 import { ImageProcessor } from "../background-tasks";
-import { start } from "../background-tasks/workers";
 
 //* V1
 // export const createBlog: RequestHandler = async (req: Request, res: Response): Promise<void> => {
@@ -54,6 +53,11 @@ export const getBlogs: RequestHandler = catchAsync(async (req: Request, res: Res
   res.status(httpStatus.OK).json(blogs);
 });
 
+export const getRecentBlogs = catchAsync(async (_req: Request, res: Response): Promise<void> => {
+  const blogs = await getRecentBlogsService();
+  res.status(httpStatus.OK).json(blogs);
+});
+
 export const uploadFile: RequestHandler = catchAsync(async (req: Request, res: Response): Promise<void> => {
   if (!req.file) {
     throw new ApiError(httpStatus.NOT_FOUND, "File not found");
@@ -68,7 +72,7 @@ export const uploadFile: RequestHandler = catchAsync(async (req: Request, res: R
     fileName,
     file: req.file,
   });
-  await start();
+  await ImageProcessor?.startWorker();
   res.status(httpStatus.OK).json({ fileName });
 });
 

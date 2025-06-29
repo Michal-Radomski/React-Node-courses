@@ -5,9 +5,21 @@ import httpStatus from "http-status";
 
 import Blog, { BlogI } from "../models/blog.model";
 import ApiError from "../utils/ApiError";
+import { CacheProcessor } from "../background-tasks";
 
 export const createBlogService = async (req: Request): Promise<void> => {
   await Blog.create(req.body);
+};
+
+export const getRecentBlogsService = async (): Promise<BlogI[]> => {
+  const blogs = await Blog.find()
+    .sort({
+      createdAt: -1,
+    })
+    .limit(10);
+  await CacheProcessor.Queue.add("CacheJob", { blogs });
+  await CacheProcessor.startWorker();
+  return blogs as BlogI[];
 };
 
 export const getBlogsService = async (): Promise<BlogI[]> => {

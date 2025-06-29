@@ -35,9 +35,9 @@ const config = {
     reportOnly: true,
   },
   redis: {
-    host: envVars.REDIS_HOST,
-    port: envVars.REDIS_PORT,
-    pass: envVars.REDIS_PASS,
+    host: envVars.REDIS_HOST as string,
+    port: envVars.REDIS_PORT as number,
+    pass: envVars.REDIS_PASS as string,
   },
 };
 

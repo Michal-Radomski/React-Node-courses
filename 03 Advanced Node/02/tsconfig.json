@@ -20,6 +20,6 @@
     // "sourceMap": true,
     // "outDir": "dist"
   },
-  "include": ["./**/*.ts", "background-tasks/workers/image-processor.js"],
+  "include": ["./**/*.ts", "background-tasks/workers/image-processor.js", "background-tasks/workers/cache-processor.js"],
   "exclude": ["node_modules"]
 }
