@@ -15,6 +15,6 @@ export default createBlogSchema;
 
 export const getBlogSchema = {
   body: joi.object({
-    userId: joi.string().required().custom(objectId),
+    userId: joi.string().required().custom(objectId), //* ???
   }),
 };

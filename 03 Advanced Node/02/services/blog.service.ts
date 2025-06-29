@@ -23,7 +23,7 @@ export const getRecentBlogsService = async (): Promise<BlogI[]> => {
 };
 
 export const getBlogsService = async (): Promise<BlogI[]> => {
-  const blogs = (await Blog.find({})) as BlogI[];
+  const blogs = (await Blog.find({}).lean()) as BlogI[];
   return blogs;
 };
 
@@ -52,3 +52,8 @@ export const getReadableFileStream = async (filename: string): Promise<fs.ReadSt
 //     .toFile(outputPath);
 //   return filename;
 // };
+
+export const searchBlogsService = async (searchQuery: string): Promise<BlogI[]> => {
+  const blogs = (await Blog.find({ $text: { $search: searchQuery } })) as BlogI[];
+  return blogs;
+};

@@ -5,7 +5,13 @@ import { ReadStream } from "fs";
 
 // import createBlogSchema from "../validations/blog.validation";
 import { catchAsync } from "../utils/catchAsync";
-import { createBlogService, getBlogsService, getReadableFileStream, getRecentBlogsService } from "../services/blog.service";
+import {
+  createBlogService,
+  getBlogsService,
+  getReadableFileStream,
+  getRecentBlogsService,
+  searchBlogsService,
+} from "../services/blog.service";
 import { BlogI } from "../models/blog.model";
 import ApiError from "../utils/ApiError";
 import { ImageProcessor } from "../background-tasks";
@@ -85,4 +91,10 @@ export const getFile = catchAsync(async (req: Request, res: Response): Promise<v
   const contentType = `image/${filename.split(".")[1].toLowerCase()}`;
   res.setHeader("Content-Type", contentType);
   stream.pipe(res);
+});
+
+export const searchBlogs = catchAsync(async (req: Request, res: Response): Promise<void> => {
+  const { searchQuery } = req.query;
+  const blogs = (await searchBlogsService(searchQuery as string)) as BlogI[];
+  res.json({ blogs });
 });
