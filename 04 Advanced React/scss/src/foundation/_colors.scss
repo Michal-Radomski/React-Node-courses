@@ -11,8 +11,8 @@
 /*=============================================
 =            Global text colors               =
 =============================================*/
-$body-text-color: var(--dse-body-text-color, $dark) !default;
-$body-bg-color: var(--dse-body-bg-color, $white) !default;
+$body-text-color: var(--dse-body-text-color, $dark) !default; //* $dark -> fallback
+$body-bg-color: var(--dse-body-bg-color, $white) !default; //* default value - can be overwritten
 
 /*=============================================
 =                 Buttons                     =
