@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "stylelint './**/*.scss'",
     "lint:fix": "stylelint './**/*.scss' --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "build": "node src/scripts/build.js"
   },
   "keywords": [],
   "author": "Michal Radomski <michalra@op.pl>",
@@ -28,6 +29,7 @@
   "devDependencies": {
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
+    "sass": "^1.89.2",
     "stylelint": "^16.21.0",
     "stylelint-config-sass-guidelines": "^12.1.0"
   }
