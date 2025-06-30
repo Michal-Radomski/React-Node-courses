@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "lint": "stylelint './**/*.scss'"
+    "lint": "stylelint './**/*.scss'",
+    "lint:fix": "stylelint './**/*.scss' --fix"
   },
   "keywords": [],
   "author": "Michal Radomski <michalra@op.pl>",
@@ -13,7 +14,17 @@
   "dependencies": {
     "normalize-scss": "^8.0.0"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.scss": "stylelint './**/*.scss' --fix"
+  },
   "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2",
     "stylelint": "^16.21.0",
     "stylelint-config-sass-guidelines": "^12.1.0"
   }
