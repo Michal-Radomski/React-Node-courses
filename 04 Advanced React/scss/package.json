@@ -5,7 +5,8 @@
   "main": "index.ts",
   "scripts": {
     "lint": "stylelint './**/*.scss'",
-    "lint:fix": "stylelint './**/*.scss' --fix"
+    "lint:fix": "stylelint './**/*.scss' --fix",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "Michal Radomski <michalra@op.pl>",
@@ -20,7 +21,9 @@
     }
   },
   "lint-staged": {
-    "*.scss": "stylelint './**/*.scss' --fix"
+    "*.{css,scss}": [
+      "stylelint --fix"
+    ]
   },
   "devDependencies": {
     "husky": "^9.1.7",
