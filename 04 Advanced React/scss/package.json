@@ -2,7 +2,6 @@
   "name": "scss",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
   "scripts": {
     "lint": "stylelint './**/*.scss'",
     "lint:fix": "stylelint './**/*.scss' --fix"
