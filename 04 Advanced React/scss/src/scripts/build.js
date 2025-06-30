@@ -31,7 +31,9 @@ const compile = (path, fileName) => {
 
 try {
   Fs.mkdirSync(Path.resolve("lib"));
-} catch (e) {}
+} catch (e) {
+  console.log({ e });
+}
 
 compile("src/global.scss", "lib/global.css");
 
