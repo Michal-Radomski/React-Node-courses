@@ -1,0 +1,20 @@
+{
+  "name": "scss",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "lint": "stylelint './**/*.scss'"
+  },
+  "keywords": [],
+  "author": "Michal Radomski <michalra@op.pl>",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "normalize-scss": "^8.0.0"
+  },
+  "devDependencies": {
+    "stylelint": "^16.21.0",
+    "stylelint-config-sass-guidelines": "^12.1.0"
+  }
+}
