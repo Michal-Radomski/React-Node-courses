@@ -8,7 +8,7 @@ export interface ColorProps {
   height?: keyof typeof Spacing;
 }
 
-const Color: React.FC<ColorProps> = ({ hexCode, width = Spacing.md, height = Spacing.md }): React.JSX.Element => {
+const Color: React.FC<ColorProps> = ({ hexCode, width = Spacing.sm, height = Spacing.sm }): React.JSX.Element => {
   const className = `dse-width-${width} dse-height-${height}`;
 
   return (
