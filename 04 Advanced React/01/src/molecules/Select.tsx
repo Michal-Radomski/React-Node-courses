@@ -58,7 +58,7 @@ const Select: React.FunctionComponent<SelectProps> = ({
   label = "Please select an option ...",
   onOptionSelected: handler,
   renderOption,
-}) => {
+}): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedIndex, setSelectedIndex] = useState<null | number>(null);
   const [highlightedIndex, setHighlightedIndex] = useState<null | number>(null);

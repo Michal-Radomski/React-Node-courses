@@ -10,11 +10,20 @@ const App = (): React.JSX.Element => {
     <React.Fragment>
       <Margin
         space="md"
-        left={true}
+        left={false}
         top={true}
         children={
           <React.Fragment>
             <Color hexCode={"#ff0000"} width="xxxl" height="xxxl" />
+            <Text children={"Test"} />
+          </React.Fragment>
+        }
+      />
+      <Margin
+        space="md"
+        children={
+          <React.Fragment>
+            <Color hexCode={"#ff00ff"} width="xxxl" height="xxxl" />
             <Text children={"Test"} />
           </React.Fragment>
         }
