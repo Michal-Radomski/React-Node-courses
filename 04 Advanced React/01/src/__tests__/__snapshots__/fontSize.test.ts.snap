@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`snapshot of fontsizes 1`] = `
+{
+  "base": "base",
+  "lg": "lg",
+  "sm": "sm",
+  "xl": "xl",
+  "xs": "xs",
+}
+`;

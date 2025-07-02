@@ -1,0 +1,16 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`snapshot of spacing 1`] = `
+{
+  "lg": "lg",
+  "md": "md",
+  "none": "none",
+  "sm": "sm",
+  "xl": "xl",
+  "xs": "xs",
+  "xxl": "xxl",
+  "xxs": "xxs",
+  "xxxl": "xxxl",
+  "xxxs": "xxxs",
+}
+`;

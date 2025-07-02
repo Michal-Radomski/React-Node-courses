@@ -1,3 +1,5 @@
+//* Vitest instead of Jest!
+
 import { defineConfig } from "vitest/config";
 
 // https://vite.dev/config/
