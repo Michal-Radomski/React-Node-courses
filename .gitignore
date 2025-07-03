@@ -35,3 +35,6 @@ citylots.json
 03b/
 uploads
 lib/
+
+*storybook.log
+storybook-static
