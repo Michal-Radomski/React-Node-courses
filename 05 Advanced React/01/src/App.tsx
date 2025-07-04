@@ -10,6 +10,7 @@ import { books } from "./data/books";
 import { NumberedList } from "./components/lists/Numbered";
 import { SmallBookListItem } from "./components/books/SmallListItems";
 import { LargeBookListItem } from "./components/books/LargeListItems";
+import { Modal } from "./components/Modal";
 
 const LeftSideComp = ({ title }: { title: string }): JSX.Element => {
   return <h2 style={{ backgroundColor: "crimson" }}>{title}</h2>;
@@ -22,6 +23,10 @@ const RightSideComp = ({ title }: { title: string }): JSX.Element => {
 const App = (): JSX.Element => {
   return (
     <React.Fragment>
+      <Modal>
+        <LargeBookListItem book={books[0]} />
+      </Modal>
+
       <SplitScreen leftWidth={1} rightWidth={3}>
         <LeftSideComp title={"Right"} />
         <RightSideComp title={"Left"} />

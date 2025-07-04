@@ -12,6 +12,7 @@ export const RegularList = ({
   return (
     <React.Fragment>
       {items.map((item: Author | Book, index: number) => (
+        //*  <ItemComponent key={index} author={item}/> The same!
         <ItemComponent key={index} {...{ [sourceName]: item }} />
       ))}
     </React.Fragment>

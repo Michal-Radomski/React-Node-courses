@@ -14,6 +14,7 @@ export const NumberedList = ({
       {items.map((item: Author | Book, index: number) => (
         <React.Fragment key={index}>
           <h3> {index + 1} </h3>
+          {/* <ItemComponent key={index} book={item} />  //* The same  */}
           <ItemComponent key={index} {...{ [sourceName]: item }} />
         </React.Fragment>
       ))}
