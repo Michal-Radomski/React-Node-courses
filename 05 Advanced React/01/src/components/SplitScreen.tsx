@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -5,7 +6,7 @@ const Container = styled.div`
 `;
 
 const Panel = styled.div<{ $flex: number }>`
-  flex: ${(p) => p.$flex};
+  flex: ${(props) => props.$flex};
 `;
 
 export const SplitScreen = ({
@@ -17,12 +18,20 @@ export const SplitScreen = ({
   leftWidth: number;
   rightWidth: number;
 }): JSX.Element => {
-  const [left, right] = children;
+  // Convert children to an array safely
+  const childrenArray = React.Children.toArray(children);
+
+  // Get left and right children or fallback to null
+  const left = childrenArray[0] || null;
+  const right = childrenArray[1] || null;
+
   return (
-    <Container>
-      <Panel $flex={leftWidth}>{left}</Panel>
-      <Panel $flex={rightWidth}>{right}</Panel>
-    </Container>
+    <React.Fragment>
+      <Container>
+        <Panel $flex={leftWidth}>{left}</Panel>
+        <Panel $flex={rightWidth}>{right}</Panel>
+      </Container>
+    </React.Fragment>
   );
 };
 
