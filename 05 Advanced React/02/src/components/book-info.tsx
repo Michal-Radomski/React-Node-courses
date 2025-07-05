@@ -1,6 +1,6 @@
 import React from "react";
 
-export const BookInfo = ({ book }: { book: Book }): JSX.Element => {
+export const BookInfo = ({ book }: { book?: Book }): JSX.Element => {
   const { name, price, title, pages } = book || {};
 
   return book ? (
