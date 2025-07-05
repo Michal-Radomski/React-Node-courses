@@ -11,3 +11,9 @@ interface Book {
   title: string;
   pages: number;
 }
+
+interface ObjectI {
+  [key: string]: string | number;
+}
+
+type Any = User | Book | ObjectI;
