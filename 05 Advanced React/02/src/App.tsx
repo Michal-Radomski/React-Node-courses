@@ -15,9 +15,19 @@ const fetchData = async (url: string) => {
   return response.data;
 };
 
+const getDataFromLocalStorage = (key: string) => () => {
+  return localStorage.getItem(key);
+};
+
+const Message = ({ msg }: { msg?: string }): JSX.Element => <h1>{msg}</h1>;
+
 const App = (): JSX.Element => {
   return (
     <React.Fragment>
+      <DataSource getData={() => getDataFromLocalStorage("test")} resourceName={"msg"}>
+        <Message />
+      </DataSource>
+
       <DataSourceWithRenderProps
         getData={() => fetchData("/api/users/1")}
         render={(resource: User) => <UserInfo user={resource} />}

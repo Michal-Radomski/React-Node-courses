@@ -10,11 +10,11 @@ export const DataSourceWithRenderProps = ({
   const [resource, setResource] = React.useState<User | null>(null);
 
   React.useEffect(() => {
-    (async () => {
+    (async (): Promise<void> => {
       const data = await getData();
       setResource(data as unknown as User);
     })();
   }, [getData]);
 
-  return render(resource!);
+  return render(resource as User);
 };
