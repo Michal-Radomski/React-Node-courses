@@ -48,22 +48,22 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 //^ Routes
-app.get("/current-user", async (req: Request, res: Response): Promise<unknown> => {
+app.get("/api/current-user", async (req: Request, res: Response): Promise<unknown> => {
   console.log("req.ip:", req.ip);
   return res.json(currentUser);
 });
 
-app.get("/users/:id", async (req: Request, res: Response): Promise<unknown> => {
+app.get("/api/users/:id", async (req: Request, res: Response): Promise<unknown> => {
   const { id } = req.params;
   return res.json(users.find((user) => user.id === id));
 });
 
-app.get("/users", async (req, res): Promise<unknown> => {
+app.get("/api/users", async (req, res): Promise<unknown> => {
   console.log("req.ip:", req.ip);
   return res.json(users);
 });
 
-app.post("/users/:id", async (req, res): Promise<unknown> => {
+app.post("/api/users/:id", async (req, res): Promise<unknown> => {
   const { id } = req.params;
   const { user: editedUser } = req.body;
 
@@ -72,12 +72,12 @@ app.post("/users/:id", async (req, res): Promise<unknown> => {
   return res.json(newUsers.find((user) => user.id === id));
 });
 
-app.get("/books", async (req, res): Promise<unknown> => {
+app.get("/api/books", async (req, res): Promise<unknown> => {
   console.log("req.ip:", req.ip);
   return res.json(books);
 });
 
-app.get("/books/:id", async (req, res): Promise<unknown> => {
+app.get("/api/books/:id", async (req, res): Promise<unknown> => {
   const { id } = req.params;
   return res.json(books.find((book) => book.id === id));
 });

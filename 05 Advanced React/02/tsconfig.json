@@ -16,7 +16,8 @@
     "strictFunctionTypes": true,
     "skipLibCheck": true,
     "noImplicitThis": true,
-    "strictPropertyInitialization": true
+    "strictPropertyInitialization": true,
+    "jsx": "react-jsx"
     // "sourceMap": true,
     // "outDir": "dist"
   },
