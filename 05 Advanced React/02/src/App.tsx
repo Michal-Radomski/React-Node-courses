@@ -8,6 +8,7 @@ import { UserLoader } from "./components/user-loader";
 import { ResourceLoader } from "./components/resource-loader";
 import { BookInfo } from "./components/book-info";
 import { DataSource } from "./components/data-source";
+import { DataSourceWithRenderProps } from "./components/data-source-with-render";
 
 const fetchData = async (url: string) => {
   const response = await axios.get(url);
@@ -17,6 +18,11 @@ const fetchData = async (url: string) => {
 const App = (): JSX.Element => {
   return (
     <React.Fragment>
+      <DataSourceWithRenderProps
+        getData={() => fetchData("/api/users/1")}
+        render={(resource: User) => <UserInfo user={resource} />}
+      />
+
       <DataSource getData={() => fetchData("/api/users/1")} resourceName={"user"}>
         <UserInfo />
       </DataSource>
