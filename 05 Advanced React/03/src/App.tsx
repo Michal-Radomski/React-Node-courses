@@ -7,27 +7,27 @@ import { UncontrolledModal } from "./components/uncontrolled-modal";
 import { ControlledModal } from "./components/controlled-modal";
 import { UncontrolledFlow } from "./components/uncontrolled-flow";
 
-const StepOne = ({ next }: { next?: () => void }): JSX.Element => {
+const StepOne = ({ next }: { next?: (arg0: { [key: string]: string | number }) => void }): JSX.Element => {
   return (
     <React.Fragment>
-      <h1>Step #1</h1>
-      <button onClick={next}>Next</button>
+      <h1>Step #1: Enter your name</h1>
+      <button onClick={() => next!({ name: "TestName" })}>Next</button>
     </React.Fragment>
   );
 };
-const StepTwo = ({ next }: { next?: () => void }): JSX.Element => {
+const StepTwo = ({ next }: { next?: (arg0: { [key: string]: string | number }) => void }): JSX.Element => {
   return (
     <React.Fragment>
-      <h1>Step #2</h1>
-      <button onClick={next}>Next</button>
+      <h1>Step #2: Enter your age</h1>
+      <button onClick={() => next!({ age: 23 })}>Next</button>
     </React.Fragment>
   );
 };
-const StepThree = ({ next }: { next?: () => void }): JSX.Element => {
+const StepThree = ({ next }: { next?: (arg0: { [key: string]: string | number }) => void }): JSX.Element => {
   return (
     <React.Fragment>
-      <h1>Step #3</h1>
-      <button onClick={next}>Next</button>
+      <h1>Step #3: Enter your country</h1>
+      <button onClick={() => next!({ country: "Poland" })}>Next</button>
     </React.Fragment>
   );
 };
@@ -38,7 +38,12 @@ const App = (): JSX.Element => {
   return (
     <React.Fragment>
       <React.Fragment>
-        <UncontrolledFlow>
+        <UncontrolledFlow
+          onDone={(data) => {
+            console.log("data:", data);
+            alert("Onboarding Flow Done!");
+          }}
+        >
           <StepOne />
           <StepTwo />
           <StepThree />
