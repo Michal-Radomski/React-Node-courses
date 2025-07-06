@@ -5,7 +5,7 @@ export const ControlledForm = (): JSX.Element => {
   const [name, setName] = React.useState<string>("");
   const [age, setAge] = React.useState<number>(0);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     console.log({ name, age, error });
   };
@@ -21,7 +21,7 @@ export const ControlledForm = (): JSX.Element => {
   return (
     <React.Fragment>
       <form onSubmit={onSubmit}>
-        {error && <p>{error}</p>}
+        {error ? <p>{error}</p> : null}
         <input name="name" type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
         <input name="age" type="number" placeholder="Age" value={age} onChange={(e) => setAge(Number(e.target.value))} />
         <button>Submit</button>

@@ -1,14 +1,15 @@
 import React from "react";
 
 export const UncontrolledForm = (): JSX.Element => {
-  const nameInputRef = React.createRef<HTMLInputElement>();
-  const ageInputRef = React.createRef<HTMLInputElement>();
+  //* Better: React.useRef!
+  const nameInputRef: React.RefObject<HTMLInputElement> = React.createRef<HTMLInputElement>();
+  const ageInputRef: React.RefObject<HTMLInputElement> = React.createRef<HTMLInputElement>();
+  // console.log("nameInputRef:", nameInputRef);
 
   const SubmitForm = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
     console.log(nameInputRef?.current?.value);
     console.log(ageInputRef?.current?.value);
-
-    e.preventDefault();
   };
 
   return (
