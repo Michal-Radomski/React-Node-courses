@@ -6,6 +6,7 @@ import { ControlledForm } from "./components/controlled-form";
 import { UncontrolledModal } from "./components/uncontrolled-modal";
 import { ControlledModal } from "./components/controlled-modal";
 import { UncontrolledFlow } from "./components/uncontrolled-flow";
+import { ControlledFlow } from "./components/controlled-flow";
 
 const StepOne = ({ next }: { next?: (arg0: { [key: string]: string | number }) => void }): JSX.Element => {
   return (
@@ -35,9 +36,26 @@ const StepThree = ({ next }: { next?: (arg0: { [key: string]: string | number })
 const App = (): JSX.Element => {
   const [showModal, setShowModal] = React.useState<boolean>(false);
 
+  const [data, setData] = React.useState<{ [key: string]: string | number }>({});
+  console.log("data:", data);
+  const [currentStepIndex, setCurrentStepIndex] = React.useState<number>(0);
+
+  const next = (dataFromStep: { [key: string]: string | number }) => {
+    setData(dataFromStep);
+    setCurrentStepIndex(currentStepIndex + 1);
+  };
+
   return (
     <React.Fragment>
       <React.Fragment>
+        <ControlledFlow currentStepIndex={currentStepIndex} onNext={next}>
+          <StepOne />
+          <StepTwo />
+          <StepThree />
+        </ControlledFlow>
+
+        <br />
+
         <UncontrolledFlow
           onDone={(data) => {
             console.log("data:", data);

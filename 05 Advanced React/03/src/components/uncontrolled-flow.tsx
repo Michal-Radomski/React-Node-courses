@@ -15,7 +15,7 @@ export const UncontrolledFlow = ({
   const currentChild = React.Children.toArray(children)[currentStepIndex];
   // console.log("currentChild:", currentChild);
 
-  const next = (dataFromStep: { [key: string]: string | number }) => {
+  const next = (dataFromStep: { [key: string]: string | number }): void => {
     const nextIndex = currentStepIndex + 1;
     const updatedData = { ...data, ...dataFromStep } as { [key: string]: string | number };
 
@@ -30,8 +30,8 @@ export const UncontrolledFlow = ({
     setData(updatedData);
   };
 
-  if (React.isValidElement<{ next?: (arg0: { [key: string]: string | number }) => void }>(currentChild)) {
-    return React.cloneElement<{ next?: (arg0: { [key: string]: string | number }) => void }>(currentChild, { next });
+  if (React.isValidElement<{ next: (arg0: { [key: string]: string | number }) => void }>(currentChild)) {
+    return React.cloneElement<{ next: (arg0: { [key: string]: string | number }) => void }>(currentChild, { next });
   }
 
   return currentChild;
