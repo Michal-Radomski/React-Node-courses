@@ -14,7 +14,7 @@ export const includeUser = (Component: React.ComponentType<UserComponentProps>, 
         const response = await axios.get(`/api/users/${userId}`);
         setUser(response.data);
       })();
-    });
+    }, []);
 
     return <React.Fragment>{user ? <Component user={user} /> : null}</React.Fragment>;
   };
