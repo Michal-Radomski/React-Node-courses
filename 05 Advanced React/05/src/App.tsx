@@ -6,6 +6,7 @@ import { UserInfo2 } from "./components/user-info2";
 import { BookInfo } from "./components/book-info";
 import { Recursive } from "./components/recursive";
 import { SmallButton, SmallRedButton } from "./components/composition";
+import { LargeRedButton2, SmallButton2 } from "./components/partial";
 
 const myNestedObject = {
   key1: "value1",
@@ -22,6 +23,9 @@ const myNestedObject = {
 const App = (): JSX.Element => {
   return (
     <React.Fragment>
+      <SmallButton2 />
+      <LargeRedButton2 />
+      <br />
       <SmallButton text={"I am small!"} />
       <SmallRedButton text={"I am small and Red"} />
 

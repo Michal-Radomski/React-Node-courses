@@ -1,12 +1,12 @@
 import React from "react";
 
 interface Props {
-  size?: string;
+  size?: "large" | "small";
   color?: string;
   text: string;
 }
 
-export const Button = ({ size, color, text, ...props }: Props): JSX.Element => {
+const Button = ({ size, color, text, ...props }: Props): JSX.Element => {
   return (
     <React.Fragment>
       <button
