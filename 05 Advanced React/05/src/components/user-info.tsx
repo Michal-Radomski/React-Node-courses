@@ -1,9 +1,12 @@
 import React from "react";
 
-import { useCurrentUser } from "./current-user.hook";
+// import { useCurrentUser } from "./current-user.hook";
+import { useUser } from "./user.hook";
 
 export const UserInfo = (): JSX.Element => {
-  const user: User = useCurrentUser();
+  // const user: User = useCurrentUser();
+  const user: User = useUser("1");
+
   const { name, age, country, books } = user || {};
 
   return user ? (
