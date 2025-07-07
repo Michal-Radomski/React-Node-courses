@@ -1,6 +1,9 @@
 import React from "react";
+import { useResource } from "./resource.hook";
 
-export const BookInfo = ({ book }: { book?: Book }): JSX.Element => {
+export const BookInfo = ({ url }: { url: string }): JSX.Element => {
+  const book = useResource(url) as Book;
+
   const { name, price, title, pages } = book || {};
 
   return book ? (
