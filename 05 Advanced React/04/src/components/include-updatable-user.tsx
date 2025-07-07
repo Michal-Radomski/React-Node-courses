@@ -3,12 +3,16 @@ import axios from "axios";
 
 type UserComponentProps = {
   user: User;
+  updatableUser: { [key: string]: string | number };
+  changeHandler: (updates: { [key: string]: string | number }) => void;
+  userPostHandler: () => Promise<void>;
+  resetUserHandler: () => void;
 };
 
 export const includeUpdatableUser = (Component: React.ComponentType<UserComponentProps>, userId: string) => {
   return () => {
     const [user, setUser] = React.useState<User | null>(null);
-    const [updatableUser, setUpdatableUser] = React.useState<User | null>(null);
+    const [updatableUser, setUpdatableUser] = React.useState<{ [key: string]: string | number } | null>(null);
 
     React.useEffect(() => {
       (async () => {
@@ -18,7 +22,7 @@ export const includeUpdatableUser = (Component: React.ComponentType<UserComponen
       })();
     }, []);
 
-    const userChangeHandler = (updates: User) => {
+    const userChangeHandler = (updates: { [key: string]: string | number }) => {
       setUpdatableUser({ ...updatableUser, ...updates });
     };
 
@@ -31,13 +35,13 @@ export const includeUpdatableUser = (Component: React.ComponentType<UserComponen
     };
 
     const resetUserHandler = () => {
-      setUpdatableUser(user);
+      setUpdatableUser(user as unknown as { [key: string]: string | number });
     };
 
     return (
       <Component
         user={user as User}
-        updatableUser={updatableUser}
+        updatableUser={updatableUser as { [key: string]: string | number }}
         changeHandler={userChangeHandler}
         userPostHandler={userPostHandler}
         resetUserHandler={resetUserHandler}
