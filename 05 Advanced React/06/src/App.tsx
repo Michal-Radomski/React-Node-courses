@@ -6,6 +6,7 @@ import "./App.scss";
 // import { Child } from "./child";
 import Counter from "./counter";
 import LayoutEffect from "./LayoutEffect";
+import Form from "./Form";
 
 const App = (): JSX.Element => {
   const [show, setShow] = React.useState<boolean>(false);
@@ -13,6 +14,8 @@ const App = (): JSX.Element => {
 
   return (
     <React.Fragment>
+      <Form />
+
       <LayoutEffect />
 
       <br />
@@ -24,7 +27,7 @@ const App = (): JSX.Element => {
         {changeShirts ? (
           <React.Fragment>
             {/* //* To differ the component */}
-            <span>Shirts counts: </span> <Counter key="shirts" /> s
+            <span>Shirts counts: </span> <Counter key="shirts" />
           </React.Fragment>
         ) : (
           <React.Fragment>
