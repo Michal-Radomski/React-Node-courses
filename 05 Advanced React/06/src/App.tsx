@@ -15,11 +15,13 @@ const App = (): JSX.Element => {
       <div>
         {changeShirts ? (
           <React.Fragment>
-            <span>Shirts counts: </span> <Counter key="shirts" /> //* To differ the components
+            {/* //* To differ the component */}
+            <span>Shirts counts: </span> <Counter key="shirts" /> s
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <span>Shoes counts: </span> <Counter key="shoes" /> //* To differ the components
+            {/* //* To differ the components */}
+            <span>Shoes counts: </span> <Counter key="shoes" />
           </React.Fragment>
         )}
         <br />
@@ -33,7 +35,7 @@ const App = (): JSX.Element => {
         </ErrorBoundary>
       </React.Fragment>
 
-      <div style={{ position: "absolute", marginTop: "200px" }}>
+      <div onClickCapture={() => console.log("outer div")} style={{ position: "absolute", marginTop: "200px" }}>
         <h1>Other Content</h1>
         <button onClick={() => setShow(true)}>Show Message</button>
         <Alert show={show} onClose={() => setShow(false)}>
@@ -59,7 +61,14 @@ const Alert = ({
   if (!show) return null as any;
 
   return createPortal(
-    <div className="alert" onClick={onClose}>
+    <div
+      className="alert"
+      // onClick={onClose}
+      onClickCapture={() => {
+        onClose();
+        console.log("inner div");
+      }}
+    >
       {children}
     </div>,
     document.querySelector("#alert-holder") as HTMLDivElement
