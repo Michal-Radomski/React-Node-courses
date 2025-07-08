@@ -33,6 +33,7 @@ const Header = ({ children }: { children: React.ReactNode }): JSX.Element => {
     </React.Fragment>
   );
 };
+
 const Footer = ({ children }: { children: React.ReactNode }): JSX.Element => {
   return (
     <React.Fragment>
@@ -57,6 +58,7 @@ const Card = ({ test, children }: { test: string; children: React.ReactNode }): 
   );
 };
 
+//* Assigning subcomponents (Header, Body, Footer) as properties of the main Card component
 Card.Header = Header;
 Card.Body = Body;
 Card.Footer = Footer;

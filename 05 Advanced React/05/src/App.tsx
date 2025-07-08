@@ -8,6 +8,7 @@ import { Recursive } from "./components/recursive";
 import { SmallButton, SmallRedButton } from "./components/composition";
 import { LargeRedButton2, SmallButton2 } from "./components/partial";
 import Card from "./components/card";
+import ParentComponent from "./components/observer/parent";
 
 const myNestedObject = {
   key1: "value1",
@@ -24,6 +25,10 @@ const myNestedObject = {
 const App = (): JSX.Element => {
   return (
     <React.Fragment>
+      <ParentComponent />
+
+      <br />
+
       <Card test="Value">
         <Card.Header>
           <h1 style={{ margin: "0" }}>Header</h1>
