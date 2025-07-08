@@ -3,7 +3,8 @@ import React from "react";
 export class ErrorBoundary extends React.Component<{ fallback: React.ReactNode; children: React.ReactNode }> {
   state = { hasError: false };
 
-  static getDerivedStateFromError(error: Error) {
+  static getDerivedStateFromError(error: Error, info: string) {
+    console.log("info:", info);
     console.log("error:", error);
     return { hasError: true };
   }
