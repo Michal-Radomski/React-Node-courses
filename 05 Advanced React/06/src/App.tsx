@@ -2,9 +2,10 @@ import React from "react";
 import { createPortal } from "react-dom";
 
 import "./App.scss";
-import { ErrorBoundary } from "./error-boundary";
-import { Child } from "./child";
+// import { ErrorBoundary } from "./error-boundary";
+// import { Child } from "./child";
 import Counter from "./counter";
+import LayoutEffect from "./LayoutEffect";
 
 const App = (): JSX.Element => {
   const [show, setShow] = React.useState<boolean>(false);
@@ -12,6 +13,13 @@ const App = (): JSX.Element => {
 
   return (
     <React.Fragment>
+      <LayoutEffect />
+
+      <br />
+      <br />
+      <br />
+      <br />
+
       <div>
         {changeShirts ? (
           <React.Fragment>
@@ -28,12 +36,12 @@ const App = (): JSX.Element => {
         <button onClick={() => setChangeShirts((s) => !s)}>Switch</button>
       </div>
 
-      <React.Fragment>
+      {/* <React.Fragment>
         <h1>Parent Component</h1>
         <ErrorBoundary fallback={<h1>Error in child</h1>}>
           <Child />
         </ErrorBoundary>
-      </React.Fragment>
+      </React.Fragment> */}
 
       <div onClickCapture={() => console.log("outer div")} style={{ position: "absolute", marginTop: "200px" }}>
         <h1>Other Content</h1>
