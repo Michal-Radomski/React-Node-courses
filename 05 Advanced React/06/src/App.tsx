@@ -15,11 +15,11 @@ const App = (): JSX.Element => {
       <div>
         {changeShirts ? (
           <React.Fragment>
-            <span>Shirts counts: </span> <Counter key="shirts" />
+            <span>Shirts counts: </span> <Counter key="shirts" /> //* To differ the components
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <span>Shoes counts: </span> <Counter key="shoes" />
+            <span>Shoes counts: </span> <Counter key="shoes" /> //* To differ the components
           </React.Fragment>
         )}
         <br />
