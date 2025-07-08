@@ -23,3 +23,15 @@ body {
   margin-right: auto;
   overflow-y: auto;
 }
+
+.alert {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  translate: -50%;
+  background-color: aquamarine;
+  color: black;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+}

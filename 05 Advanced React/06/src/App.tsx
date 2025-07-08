@@ -2,12 +2,21 @@ import React from "react";
 import { createPortal } from "react-dom";
 
 import "./App.scss";
+import { ErrorBoundary } from "./error-boundary";
+import { Child } from "./child";
 
 const App = (): JSX.Element => {
   const [show, setShow] = React.useState<boolean>(false);
 
   return (
     <React.Fragment>
+      <React.Fragment>
+        <h1>Parent Component</h1>
+        <ErrorBoundary fallback={<h1>Error in child</h1>}>
+          <Child />
+        </ErrorBoundary>
+      </React.Fragment>
+
       <div style={{ position: "absolute", marginTop: "200px" }}>
         <h1>Other Content</h1>
         <button onClick={() => setShow(true)}>Show Message</button>
