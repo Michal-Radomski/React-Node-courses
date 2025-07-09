@@ -30,7 +30,6 @@ const Wrapper = (): JSX.Element => {
         router={router}
         future={{
           v7_startTransition: true,
-          // v7_relativeSplatPath: true,
         }}
       />
     </React.Fragment>
