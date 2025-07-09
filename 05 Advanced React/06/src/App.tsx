@@ -7,6 +7,7 @@ import "./App.scss";
 import Counter from "./counter";
 import LayoutEffect from "./LayoutEffect";
 import Form from "./Form";
+import CallbackAsRef from "./CallbackAsRef";
 
 const App = (): JSX.Element => {
   const [show, setShow] = React.useState<boolean>(false);
@@ -14,6 +15,8 @@ const App = (): JSX.Element => {
 
   return (
     <React.Fragment>
+      <CallbackAsRef />
+
       <Form />
 
       <LayoutEffect />
