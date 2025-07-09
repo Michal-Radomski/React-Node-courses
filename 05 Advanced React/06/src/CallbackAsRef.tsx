@@ -1,5 +1,12 @@
 import React from "react";
 
+//* Pattern
+// const setInputRef = useCallback((node) => {
+//   if (node) {
+//     node.focus(); // the DOM node is mounted and available
+//   }
+// }, []);
+
 const CallbackAsRef = (): JSX.Element => {
   const [show, setShow] = React.useState<boolean>(false);
 
@@ -16,7 +23,7 @@ const CallbackAsRef = (): JSX.Element => {
 
   return (
     <React.Fragment>
-      <button onClick={() => setShow((s) => !s)}>Switch</button>
+      <button onClick={() => setShow((show) => !show)}>Switch</button>
       {show ? <input type="text" ref={inputRef} /> : null}
     </React.Fragment>
   );
