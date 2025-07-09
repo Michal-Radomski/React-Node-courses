@@ -9,6 +9,7 @@ import { StyledButton } from "./styled-elements";
 const Button = ({ onClick, ...props }: { onClick: () => void }): JSX.Element => {
   // console.log("onClick:", onClick);
 
+  //* startTransition is a function that you wrap around non-urgent state updates - doesn't freeze the app
   const [isPending, startTransition] = React.useTransition();
   // console.log("isPending:", isPending);
 
