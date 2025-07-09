@@ -9,6 +9,7 @@ import LayoutEffect from "./LayoutEffect";
 import Form from "./Form";
 import CallbackAsRef from "./CallbackAsRef";
 import HeavyComponentWrapper from "./heavy-component";
+import TransitionWrapper from "./transition/TransitionWrapper";
 
 const App = (): JSX.Element => {
   const [show, setShow] = React.useState<boolean>(false);
@@ -16,6 +17,8 @@ const App = (): JSX.Element => {
 
   return (
     <React.Fragment>
+      <TransitionWrapper />
+      <br />
       <HeavyComponentWrapper />
       <br />
       <CallbackAsRef />

@@ -26,7 +26,9 @@ const HeavyComponentWrapper = (): JSX.Element => {
   return (
     <React.Fragment>
       <input value={keyword} onChange={(e) => setKeyword(e.target.value)} />
+      {/* //* It defers updating a value to a lower-priority render (waits for other */}
       <HeavyComponent keyword={deferredKeyword} />
+      are finished)
     </React.Fragment>
   );
 };
