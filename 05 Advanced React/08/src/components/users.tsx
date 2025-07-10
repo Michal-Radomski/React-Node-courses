@@ -2,43 +2,28 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import { fetchUser } from "../api/userApi";
-import { useApiStatus } from "../api/hooks/useApiStatus";
-import { apiStatus } from "../constants/api-status";
-import { withAsync } from "../helpers/with-async";
 import LazyLoader from "./lazy-loader";
+import { useApi } from "../api/hooks/useApi";
 
 const useFetchUsers = () => {
-  const [users, setUsers] = React.useState<ObjectI[]>([]);
-
   const {
+    data: users,
+    exec: initFetchUsers,
     status: fetchUsersStatus,
-    setStatus: setFetchUsersStatus,
     isIdle: isFetchUsersStatusIdle,
     isPending: isFetchUsersStatusPending,
     isError: isFetchUsersStatusError,
     isSuccess: isFetchUsersStatusSuccess,
-  } = useApiStatus(apiStatus.IDLE);
-
-  console.log("fetchUsersStatus:", fetchUsersStatus);
-
-  const initFetchUsers = async (): Promise<void> => {
-    setFetchUsersStatus(apiStatus.PENDING);
-    const { response, error } = await withAsync(() => fetchUser());
-    if (error) {
-      setFetchUsersStatus(apiStatus.ERROR);
-    } else if (response) {
-      setUsers(response);
-      setFetchUsersStatus(apiStatus.SUCCESS);
-    }
-  };
+  } = useApi(() => fetchUser().then((response) => response.data));
 
   return {
     users,
+    fetchUsersStatus,
+    initFetchUsers,
     isFetchUsersStatusIdle,
     isFetchUsersStatusPending,
     isFetchUsersStatusError,
     isFetchUsersStatusSuccess,
-    initFetchUsers,
   };
 };
 
@@ -75,15 +60,8 @@ const FetchButton = styled.button`
 `;
 
 function Users(): JSX.Element {
-  const {
-    users,
-    initFetchUsers,
-    isFetchUsersStatusIdle,
-    isFetchUsersStatusPending,
-    isFetchUsersStatusSuccess,
-    isFetchUsersStatusError,
-  } = useFetchUsers();
-  console.log("isFetchUsersStatusError:", isFetchUsersStatusError);
+  const { users, initFetchUsers, isFetchUsersStatusIdle, isFetchUsersStatusPending, isFetchUsersStatusSuccess } =
+    useFetchUsers();
 
   useEffect(() => {
     initFetchUsers();
@@ -100,7 +78,7 @@ function Users(): JSX.Element {
           <ContentContainer>
             {isFetchUsersStatusIdle ? <p>Welcome</p> : null}
             {isFetchUsersStatusSuccess
-              ? users.map((user, index) => (
+              ? users.map((user: ObjectI, index: number) => (
                   <React.Fragment key={index}>
                     <UserName>{user.name as string}</UserName>
                     <UserEmail>{user.email as string}</UserEmail>
