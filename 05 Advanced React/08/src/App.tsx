@@ -1,12 +1,14 @@
 import React from "react";
 
 import "./App.scss";
-import Users from "./components/users";
+import SearchMeal from "./components/search-meals";
+// import Users from "./components/users";
 
 const App = (): JSX.Element => {
   return (
     <React.Fragment>
-      <Users />
+      <SearchMeal />
+      {/* <Users /> */}
     </React.Fragment>
   );
 };
