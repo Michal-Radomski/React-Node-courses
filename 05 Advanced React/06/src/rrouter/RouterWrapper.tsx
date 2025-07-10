@@ -23,7 +23,7 @@ const router = createBrowserRouter(
   {}
 );
 
-const Wrapper = (): JSX.Element => {
+const RouterWrapper = (): JSX.Element => {
   return (
     <React.Fragment>
       <RouterProvider
@@ -36,4 +36,4 @@ const Wrapper = (): JSX.Element => {
   );
 };
 
-export default Wrapper;
+export default RouterWrapper;

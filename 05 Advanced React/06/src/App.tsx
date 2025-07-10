@@ -10,8 +10,9 @@ import Form from "./Form";
 import CallbackAsRef from "./CallbackAsRef";
 import HeavyComponentWrapper from "./heavy-component";
 import TransitionWrapper from "./transition/TransitionWrapper";
-import Wrapper from "./rrouter/Wrapper";
+import RouteWrapper from "./rrouter/RouterWrapper";
 import ButtonWrapper from "./elem_prop/Button";
+import ContextWrapper from "./context/ContextWrapper";
 
 const App = (): JSX.Element => {
   const [show, setShow] = React.useState<boolean>(false);
@@ -19,10 +20,13 @@ const App = (): JSX.Element => {
 
   return (
     <React.Fragment>
+      <ContextWrapper />
+      <br />
+
       <ButtonWrapper />
       <br />
 
-      <Wrapper />
+      <RouteWrapper />
       <br />
 
       <TransitionWrapper />
