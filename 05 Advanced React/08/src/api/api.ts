@@ -5,7 +5,7 @@ const axiosParams = {
   baseURL: process.env.NODE_ENV === "development" ? "http://localhost:8080" : "/",
 };
 
-const axiosInstance = axios.create(axiosParams);
+const axiosInstance: AxiosInstance = axios.create(axiosParams);
 
 const api = (axios: AxiosInstance) => {
   return {
@@ -16,4 +16,5 @@ const api = (axios: AxiosInstance) => {
     put: (url: string, body: ObjectI, config = {}) => axios.put(url, body, config),
   };
 };
+
 export default api(axiosInstance);
