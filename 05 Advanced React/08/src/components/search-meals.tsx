@@ -11,7 +11,7 @@ const useFetchMeals = () => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   const abortRef = React.useRef<{ abort: Function }>({} as { abort: Function });
 
-  const handleQuoteError = (error: CustomError) => {
+  const handleQuoteError = (error: CustomError): void => {
     if (didAbort(error)) {
       toast.error("Request aborted!");
     } else {
