@@ -11,6 +11,7 @@ import CallbackAsRef from "./CallbackAsRef";
 import HeavyComponentWrapper from "./heavy-component";
 import TransitionWrapper from "./transition/TransitionWrapper";
 import Wrapper from "./rrouter/Wrapper";
+import ButtonWrapper from "./elem_prop/Button";
 
 const App = (): JSX.Element => {
   const [show, setShow] = React.useState<boolean>(false);
@@ -18,6 +19,9 @@ const App = (): JSX.Element => {
 
   return (
     <React.Fragment>
+      <ButtonWrapper />
+      <br />
+
       <Wrapper />
       <br />
 
