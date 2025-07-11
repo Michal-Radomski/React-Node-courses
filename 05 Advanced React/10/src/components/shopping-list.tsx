@@ -41,8 +41,9 @@ const StyledButton = styled.button`
 
 // Generate an id for new shopping list items
 const getUuid = () => "_" + Math.random().toString(36).substr(2, 9);
+// console.log("getUuid():", getUuid());
 
-//Initial state for the shopping list reducer
+// Initial state for the shopping list reducer
 const shoppingItems = {
   newShoppingItemName: "",
   items: [
