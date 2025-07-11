@@ -79,6 +79,7 @@ const TasksBoard = (): JSX.Element => {
   const [board, setBoard] = useImmer(boardData);
 
   const [selectedTask, setSelectedTask] = React.useState<Task | null>(null);
+  // console.log("selectedTask:", selectedTask);
 
   const onSelectTask = (columnIdx: number, taskIdx: number) => {
     setSelectedTask({
