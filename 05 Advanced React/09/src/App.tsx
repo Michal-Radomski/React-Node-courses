@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.scss";
 import FetchTopQuotes from "./components/top-quotes";
 import UpdateQuotes from "./components/update-quotes";
+import PaginatedQuotes from "./components/paginated-quotes";
 
 const queryClient = new QueryClient();
 
@@ -14,6 +15,7 @@ const App = (): JSX.Element => {
     <React.Fragment>
       <QueryClientProvider client={queryClient}>
         <ToastContainer />
+        <PaginatedQuotes />
         <UpdateQuotes />
         <FetchTopQuotes />
       </QueryClientProvider>
