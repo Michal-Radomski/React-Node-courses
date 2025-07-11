@@ -75,6 +75,7 @@ const FetchTopQuotes = (): JSX.Element => {
           <Title>Top Quotes</Title>
           {isError ? <ErrorMessage>There was a problem with fetching quotes</ErrorMessage> : null}
           {isLoading ? <LoadingMessage>Fetching quotes</LoadingMessage> : null}
+
           {isSuccess ? (
             <QuotesContainer>
               {(quotes as Quote[])?.map((quote: Quote) => (
@@ -94,4 +95,5 @@ const FetchTopQuotes = (): JSX.Element => {
     </React.Fragment>
   );
 };
+
 export default FetchTopQuotes;
