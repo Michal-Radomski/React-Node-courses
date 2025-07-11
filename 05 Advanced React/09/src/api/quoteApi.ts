@@ -1,6 +1,6 @@
 import api from "./api";
 
-export const fetchTopQuotes = () => api.get("top_quotes").then((res) => res.data.quotes);
+export const fetchTopQuotes = (config = {}) => api.get("top_quotes", config).then((res) => res.data.quotes);
 
 export const postQuote = (quote: ObjectI) => api.post("", quote);
 
