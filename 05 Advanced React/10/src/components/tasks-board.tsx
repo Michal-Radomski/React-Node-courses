@@ -76,12 +76,13 @@ const UpdateTaskInput = styled.input`
 `;
 
 const TasksBoard = (): JSX.Element => {
-  const [board, setBoard] = useImmer(boardData);
+  // const [board, setBoard] = React.useState(boardData); //* V1
+  const [board, setBoard] = useImmer(boardData); //* V2
 
   const [selectedTask, setSelectedTask] = React.useState<Task | null>(null);
   // console.log("selectedTask:", selectedTask);
 
-  const onSelectTask = (columnIdx: number, taskIdx: number) => {
+  const onSelectTask = (columnIdx: number, taskIdx: number): void => {
     setSelectedTask({
       columnIdx,
       taskIdx,
@@ -93,10 +94,12 @@ const TasksBoard = (): JSX.Element => {
 
     const { columnIdx, taskIdx } = selectedTask;
 
+    //* V2
     setBoard((board) => {
       board.columns[columnIdx].tasks[taskIdx].name = e.target.value;
     });
 
+    //* V1
     // setBoard((board) => {
     //   return {
     //     ...board,
@@ -124,41 +127,44 @@ const TasksBoard = (): JSX.Element => {
   };
 
   return (
-    <Container>
-      <Header>
-        <HeaderBackground>
-          <BoardTitle>{board.name}</BoardTitle>
-        </HeaderBackground>
-        <Content>
-          {board.columns.map((column, columnIdx) => (
-            <ColumnContainer key={columnIdx}>
-              <ColumnHeader>{column.name}</ColumnHeader>
-              <TaskContainer>
-                {column.tasks.map((task, taskIdx) => (
-                  <TaskButton
-                    key={taskIdx}
-                    $isSelected={columnIdx === selectedTask?.columnIdx && taskIdx === selectedTask?.taskIdx}
-                    onClick={() => onSelectTask(columnIdx, taskIdx)}
-                  >
-                    <h4>{task.name}</h4>
-                  </TaskButton>
-                ))}
-              </TaskContainer>
-            </ColumnContainer>
-          ))}
-          <div>
-            <UpdateTaskHeader>{selectedTask ? "Update task" : "Select a task to update"}</UpdateTaskHeader>
-            {selectedTask ? (
-              <UpdateTaskInput
-                type="text"
-                value={board.columns[selectedTask.columnIdx].tasks[selectedTask.taskIdx].name}
-                onChange={onTaskNameChange}
-              />
-            ) : null}
-          </div>
-        </Content>
-      </Header>
-    </Container>
+    <React.Fragment>
+      <Container>
+        <Header>
+          <HeaderBackground>
+            <BoardTitle>{board.name}</BoardTitle>
+          </HeaderBackground>
+          <Content>
+            {board.columns.map((column, columnIdx) => (
+              <ColumnContainer key={columnIdx}>
+                <ColumnHeader>{column.name}</ColumnHeader>
+                <TaskContainer>
+                  {column.tasks.map((task, taskIdx) => (
+                    <TaskButton
+                      key={taskIdx}
+                      $isSelected={columnIdx === selectedTask?.columnIdx && taskIdx === selectedTask?.taskIdx}
+                      onClick={() => onSelectTask(columnIdx, taskIdx)}
+                    >
+                      <h4>{task.name}</h4>
+                    </TaskButton>
+                  ))}
+                </TaskContainer>
+              </ColumnContainer>
+            ))}
+            <div>
+              <UpdateTaskHeader>{selectedTask ? "Update task" : "Select a task to update"}</UpdateTaskHeader>
+              {selectedTask ? (
+                <UpdateTaskInput
+                  type="text"
+                  value={board.columns[selectedTask.columnIdx].tasks[selectedTask.taskIdx].name}
+                  onChange={onTaskNameChange}
+                />
+              ) : null}
+            </div>
+          </Content>
+        </Header>
+      </Container>
+    </React.Fragment>
   );
 };
+
 export default TasksBoard;
