@@ -1,6 +1,5 @@
 import React from "react";
 import { useQuery, useQueryClient } from "react-query";
-
 import { toast } from "react-toastify";
 import styled from "styled-components";
 
@@ -8,7 +7,7 @@ import { fetchTopQuotes } from "../api/quoteApi";
 
 const Container = styled.div`
   padding: 2rem 0;
-  max-width: 2xl;
+  max-width: 1200px;
   margin: auto;
 `;
 
