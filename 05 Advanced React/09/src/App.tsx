@@ -7,6 +7,7 @@ import "./App.scss";
 import FetchTopQuotes from "./components/top-quotes";
 import UpdateQuotes from "./components/update-quotes";
 import PaginatedQuotes from "./components/paginated-quotes";
+import InfiniteScrollQuotes from "./components/infinite-scroll-quotes";
 
 const queryClient = new QueryClient();
 
@@ -15,6 +16,8 @@ const App = (): JSX.Element => {
     <React.Fragment>
       <QueryClientProvider client={queryClient}>
         <ToastContainer />
+        <InfiniteScrollQuotes />
+
         <PaginatedQuotes />
         <UpdateQuotes />
         <FetchTopQuotes />

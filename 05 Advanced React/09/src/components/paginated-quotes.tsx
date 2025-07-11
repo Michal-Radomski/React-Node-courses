@@ -103,6 +103,7 @@ const PaginatedQuotes = (): JSX.Element => {
           <Title>Paginated Quotes</Title>
           {isError ? <ErrorMessage>There was a problem with fetching quotes</ErrorMessage> : null}
           {isLoading ? <LoadingMessage>Fetching quotes</LoadingMessage> : null}
+
           {isSuccess ? (
             <QuotesContainer>
               <div>
