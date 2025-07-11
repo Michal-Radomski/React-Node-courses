@@ -63,7 +63,7 @@ const shoppingItems = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const reducer = (state: any, action: any) => {
+const reducer = (state: { newShoppingItemName: string; items: Item[] }, action: any) => {
   switch (action.type) {
     case "UPDATE_NEW_SHOPPING_ITEM_NAME":
       state.newShoppingItemName = action.payload;
@@ -83,7 +83,7 @@ const reducer = (state: any, action: any) => {
 };
 
 const ShoppingList = (): JSX.Element => {
-  const [shoppingList, dispatch] = useImmerReducer(reducer, shoppingItems);
+  const [shoppingList, dispatch] = useImmerReducer(reducer, shoppingItems); //* Similar to React.useReducer
 
   const addItem = (): void => {
     if (!shoppingList.newShoppingItemName) return;

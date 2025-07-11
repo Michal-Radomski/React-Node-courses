@@ -6,5 +6,4 @@ interface Task {
 interface Item {
   id: string;
   name: string;
-  index?: number;
 }
