@@ -77,7 +77,7 @@ const UpdateTaskInput = styled.input`
 
 const TasksBoard = (): JSX.Element => {
   // const [board, setBoard] = React.useState(boardData); //* V1
-  const [board, setBoard] = useImmer(boardData); //* V2
+  const [board, setBoard] = useImmer(boardData); //* V2 - similar to React.useState
 
   const [selectedTask, setSelectedTask] = React.useState<Task | null>(null);
   // console.log("selectedTask:", selectedTask);
