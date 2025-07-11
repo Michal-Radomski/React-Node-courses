@@ -27,14 +27,12 @@ const StyledButton = styled.button`
   min-width: 5rem;
 `;
 
-const AddIngredient = (props: {
-  addIngredient: (ingredient: string) => void;
-  ingredient: string;
-  setIngredient: React.Dispatch<React.SetStateAction<string>>;
-}): JSX.Element => {
+const AddIngredient = (props: { addIngredient: (ingredient: string) => void }): JSX.Element => {
   console.log("AddIngredient rendered");
 
-  const { addIngredient, ingredient, setIngredient } = props;
+  const { addIngredient } = props;
+
+  const [ingredient, setIngredient] = React.useState<string>("");
 
   return (
     <React.Fragment>

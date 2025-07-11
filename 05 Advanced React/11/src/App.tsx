@@ -5,6 +5,7 @@ import styled from "styled-components";
 import "./App.scss";
 import LazyLoader from "./components/lazy-loader";
 import Ingredients from "./components/ingredients";
+import IngredientsInfoHelper from "./components/ingredients-info-helper";
 
 const Home = React.lazy(() => import("./components/home"));
 const About = React.lazy(() => import("./components/about"));
@@ -34,7 +35,7 @@ const Nav = styled.nav`
 const App = (): JSX.Element => {
   return (
     <React.Fragment>
-      <Ingredients />
+      <Ingredients ingredientsInfoHelper={<IngredientsInfoHelper />} />
 
       <AppContainer>
         <Heading>Advanced React - Codelicks Academy</Heading>

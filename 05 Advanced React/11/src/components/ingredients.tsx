@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 import styled from "styled-components";
 
 import IngredientsList from "./ingredients-list";
-import IngredientsInfoHelper from "./ingredients-info-helper";
+// import IngredientsInfoHelper from "./ingredients-info-helper";
 import AddIngredient from "./add-ingredient";
 
 const StyledContainer = styled.div`
@@ -50,10 +50,9 @@ const initialIngredients = [
   },
 ] as Ingredient[];
 
-const Ingredients = (): JSX.Element => {
+const Ingredients = ({ ingredientsInfoHelper }: { ingredientsInfoHelper: React.ReactNode }): JSX.Element => {
   console.log("Ingredient rendered");
 
-  const [ingredient, setIngredient] = React.useState<string>("");
   const [ingredients, setIngredients] = React.useState<Ingredient[]>(initialIngredients);
 
   const addIngredient = (ingredient: string): void => {
@@ -67,26 +66,33 @@ const Ingredients = (): JSX.Element => {
   };
 
   const deleteIngredient = React.useCallback((id: string): void => {
-    setIngredients((ingredients) => ingredients.filter((ing) => ing.id !== id));
+    setIngredients((ingredients: Ingredient[]) => ingredients.filter((ing: Ingredient) => ing.id !== id));
   }, []);
 
-  const createIngredientsHeaderText = (): JSX.Element => {
+  // const createIngredientsHeaderText = (): JSX.Element => {
+  //   console.log("createIngredientsHeaderText called");
+  //   return <StyledHeading2>Ingredients ({ingredients.length})</StyledHeading2>;
+  // };
+
+  const ingredientsHeaderText: JSX.Element = React.useMemo(() => {
     console.log("createIngredientsHeaderText called");
     return <StyledHeading2>Ingredients ({ingredients.length})</StyledHeading2>;
-  };
+  }, [ingredients.length]);
 
   return (
     <React.Fragment>
       <StyledContainer>
         <div>
-          {createIngredientsHeaderText()}
-          <IngredientsInfoHelper />
+          {/* {createIngredientsHeaderText()} */}
+          {ingredientsHeaderText}
+          {/* <IngredientsInfoHelper /> */}
+          {ingredientsInfoHelper}
         </div>
 
         <StyledSpaceY4>
           <IngredientsList ingredients={ingredients} deleteIngredient={deleteIngredient} />
 
-          <AddIngredient addIngredient={addIngredient} ingredient={ingredient} setIngredient={setIngredient} />
+          <AddIngredient addIngredient={addIngredient} />
         </StyledSpaceY4>
       </StyledContainer>
     </React.Fragment>
