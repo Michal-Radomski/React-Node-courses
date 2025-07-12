@@ -7,7 +7,7 @@ const URLS = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const searchMeals = (query: string, config: AxiosRequestConfig<any>): Promise<any> => {
+export const searchMeals = (query: string, config?: AxiosRequestConfig<any>): Promise<any> => {
   return api
     .get(URLS.getMeal, {
       baseURL: "https://www.themealdb.com/api/json/v1/1/",
