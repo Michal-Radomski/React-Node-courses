@@ -2,19 +2,11 @@ import styled from "styled-components";
 import { typescale } from "../style";
 
 export const Button = styled.button<{
-  $theme?: {
+  $theme: {
     primaryHoverColor: string;
     textColorPrimary: string;
     primaryActiveColor: string;
     textColorDisabled: string;
-    primaryColor: string;
-    primaryDisabledColor: string;
-    status?: {
-      warningColor: string;
-      textColorContrast: string;
-      warningHoverColor: string;
-      warningActiveColor: string;
-    };
   };
 }>`
   font-size: ${typescale.paragraph};
@@ -47,7 +39,19 @@ export const Button = styled.button<{
   }
 `;
 
-export const PrimaryButton = styled(Button)`
+export const PrimaryButton = styled(Button)<{
+  $theme?: {
+    primaryColor: string;
+    textColorPrimary: string;
+    primaryDisabledColor: string;
+    status?: {
+      warningColor: string;
+      textColorContrast: string;
+      warningHoverColor: string;
+      warningActiveColor: string;
+    };
+  };
+}>`
   background-color: ${(props) => props.$theme?.primaryColor};
   color: ${(props) => props.$theme?.textColorPrimary};
   border: 3px solid transparent;
@@ -83,7 +87,18 @@ export const PrimaryButton = styled(Button)`
   }
 `;
 
-export const SecondaryButton = styled(Button)`
+export const SecondaryButton = styled(Button)<{
+  $theme?: {
+    primaryColor: string;
+    primaryDisabledColor: string;
+    status?: {
+      warningColor: string;
+      textColorContrast: string;
+      warningHoverColor: string;
+      warningActiveColor: string;
+    };
+  };
+}>`
   background: none;
   border: 3px solid ${(props) => props.$theme?.primaryColor};
   color: ${(props) => props.$theme?.primaryColor};

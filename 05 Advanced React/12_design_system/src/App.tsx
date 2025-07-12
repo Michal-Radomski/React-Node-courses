@@ -7,8 +7,10 @@ import { RegisterModal } from "./components/RegisterModal";
 
 import "./App.scss";
 
+//* Button styling doesn't work?!
 const App = (): JSX.Element => {
   const [useDarkTheme, setDarkTheme] = React.useState<boolean>(false);
+
   return (
     <React.Fragment>
       <button
