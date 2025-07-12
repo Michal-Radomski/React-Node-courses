@@ -8,10 +8,13 @@ import GridPattern from "./components/GridPattern";
 import AttrsExample from "./AttrsExample";
 import InlineBundlePattern from "./components/InlineBundlePattern";
 import InlinePattern from "./components/inline/InlinePattern";
+import PadPattern from "./components/pad/PadPattern";
 
 const App = (): JSX.Element => {
   return (
     <React.Fragment>
+      <PadPattern />
+      <br />
       <InlinePattern />
       <br />
       <InlineBundlePattern />
