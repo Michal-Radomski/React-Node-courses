@@ -10,7 +10,7 @@ const justifyAlignMap = {
   center: "center",
 };
 
-export const InlineBundle = styled.div<{ $gutter: string; $justify: string; $align: string }>`
+export const InlineBundle = styled.div<{ $gutter?: string; $justify?: string; $align: string }>`
   --gutter: ${(props) => spacingSchema[props.$gutter as keyof typeof spacingSchema] ?? spacingSchema.l};
   display: flex;
   flex-wrap: wrap;

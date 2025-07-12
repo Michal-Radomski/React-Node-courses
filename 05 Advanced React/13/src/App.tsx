@@ -7,10 +7,13 @@ import ColumnPattern from "./components/ColumnPattern";
 import GridPattern from "./components/GridPattern";
 import AttrsExample from "./AttrsExample";
 import InlineBundlePattern from "./components/InlineBundlePattern";
+import InlinePattern from "./components/inline/InlinePattern";
 
 const App = (): JSX.Element => {
   return (
     <React.Fragment>
+      <InlinePattern />
+      <br />
       <InlineBundlePattern />
       <br />
       <AttrsExample />
