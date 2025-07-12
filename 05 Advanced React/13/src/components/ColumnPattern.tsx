@@ -6,6 +6,7 @@ import { InputGroup } from "./Form";
 import { Split } from "./SplitPattern";
 
 export const Columns = styled.div<{ $columns: number; $gutter?: string }>`
+  /* //* CSS declaration of var */
   --columns: ${({ $columns = 1 }) => $columns};
   display: grid;
   gap: ${(props) => spacingSchema[props.$gutter as keyof typeof spacingSchema] ?? spacingSchema.l};
