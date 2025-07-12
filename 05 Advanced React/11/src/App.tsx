@@ -6,6 +6,7 @@ import "./App.scss";
 import LazyLoader from "./components/lazy-loader";
 import Ingredients from "./components/ingredients";
 import IngredientsInfoHelper from "./components/ingredients-info-helper";
+import TrackMouse from "./throttle/track-mouse";
 
 const Home = React.lazy(() => import("./components/home"));
 const About = React.lazy(() => import("./components/about"));
@@ -35,6 +36,8 @@ const Nav = styled.nav`
 const App = (): JSX.Element => {
   return (
     <React.Fragment>
+      <TrackMouse />
+
       <Ingredients ingredientsInfoHelper={<IngredientsInfoHelper />} />
 
       <AppContainer>
