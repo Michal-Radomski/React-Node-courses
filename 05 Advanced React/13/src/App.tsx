@@ -6,10 +6,13 @@ import SplitPattern from "./components/SplitPattern";
 import ColumnPattern from "./components/ColumnPattern";
 import GridPattern from "./components/GridPattern";
 import AttrsExample from "./AttrsExample";
+import InlineBundlePattern from "./components/InlineBundlePattern";
 
 const App = (): JSX.Element => {
   return (
     <React.Fragment>
+      <InlineBundlePattern />
+      <br />
       <AttrsExample />
       <br />
       <GridPattern />

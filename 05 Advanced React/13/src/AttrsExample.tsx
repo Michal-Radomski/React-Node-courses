@@ -35,14 +35,14 @@ const PasswordInput = styled.input.attrs({
 //* Grok
 // Define a type for the component's props
 interface InputProps {
-  testId?: string; // Optional prop for dynamic data-test attribute
+  $testId?: string; // Optional prop for dynamic data-test attribute
 }
 
 // Create a styled input with attrs
-const StyledInput = styled.input.attrs<InputProps>(({ testId }) => ({
+const StyledInput = styled.input.attrs<InputProps>(({ $testId }) => ({
   type: "text", // Static attribute
   placeholder: "Enter your name", // Static attribute
-  "data-test": testId || "input-default", // Dynamic attribute based on prop
+  "data-test": $testId || "input-default", // Dynamic attribute based on prop
 }))`
   padding: 8px;
   border: 2px solid #007bff;
@@ -61,7 +61,7 @@ const AttrsExample = (): JSX.Element => {
       <Input placeholder="Default size" />
       <Input placeholder="Large size" $size="2em" />
       <PasswordInput placeholder="password" />
-      <StyledInput testId="name-input" />
+      <StyledInput $testId="name-input" />
       {/* Will use default data-test="input-default" */}
       <StyledInput />
     </React.Fragment>
