@@ -5,17 +5,18 @@ import "./books.scss";
 interface BooksI {
   children: React.ReactNode;
   count: number;
-  onChange: (arg0: unknown) => void;
+  onSubmit: React.FormEventHandler<HTMLFormElement>;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-export const Books = ({ children, count, onChange }: BooksI): JSX.Element => {
+export const Books = ({ children, count, onChange, onSubmit }: BooksI): JSX.Element => {
   return (
     <React.Fragment>
       <section className="book-list gap-8">
         <form
-          onSubmit={(e) => {
+          onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
             e.preventDefault();
-            onChange(e);
+            onSubmit(e);
           }}
         >
           <label htmlFor="number-of-books-to-load" className="book-form-label">

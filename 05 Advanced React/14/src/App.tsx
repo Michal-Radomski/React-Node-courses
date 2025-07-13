@@ -6,6 +6,7 @@ import ShoppingCard from "./use_state/shopping-card";
 import { BookI } from "./Interfaced";
 import Loader from "./use_state/loader/loader";
 import Book from "./use_state/books/book";
+import Books from "./use_state/books/books";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const fetchRandomBook = async (): Promise<BookI> => {
@@ -14,7 +15,7 @@ export const fetchRandomBook = async (): Promise<BookI> => {
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const fetchBook = async (count: number): Promise<BookI> => {
+export const fetchBooks = async (count: number): Promise<BookI[]> => {
   const response = await axios.get(`/api/books?limit=${count}`);
   return response.data;
 };
@@ -22,6 +23,8 @@ export const fetchBook = async (count: number): Promise<BookI> => {
 const App = (): JSX.Element => {
   const [book, setBook] = React.useState<BookI | null>(null);
   // console.log("book:", book);
+  const [count, setCount] = React.useState(10);
+  const [books, setBooks] = React.useState<BookI[]>([]);
 
   React.useEffect(() => {
     fetchRandomBook().then(setBook);
@@ -34,6 +37,16 @@ const App = (): JSX.Element => {
   return (
     <React.Fragment>
       <main className="w-full max-w-2xl py-16 mx-auto">
+        <Books
+          count={count}
+          onChange={(e) => setCount(e.target.valueAsNumber)}
+          onSubmit={() => fetchBooks(count).then(setBooks)}
+        >
+          {books.map((book: BookI, index: number) => {
+            return <Book title={book.title} author={book.author} key={index} />;
+          })}
+        </Books>
+
         <Book title={book.title} author={book.author} />
       </main>
       <ShoppingCard />
