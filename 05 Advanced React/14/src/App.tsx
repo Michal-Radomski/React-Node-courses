@@ -7,7 +7,8 @@ import { BookI } from "./Interfaced";
 import Loader from "./use_state/loader/loader";
 import Book from "./use_state/books/book";
 import Books from "./use_state/books/books";
-import { useUser } from "./useUser";
+// import { useUser } from "./useUser";
+import { useUser2 } from "./useUser2";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const fetchRandomBook = async (): Promise<BookI> => {
@@ -22,15 +23,18 @@ export const fetchBooks = async (count: number): Promise<BookI[]> => {
 };
 
 //* Custom hook
-const useUrl = (defaultUrl: string): readonly [string, React.Dispatch<React.SetStateAction<string>>] => {
-  const [url, setUrl] = React.useState(defaultUrl);
+// const useUrl = (defaultUrl: string): readonly [string, React.Dispatch<React.SetStateAction<string>>] => {
+//   const [url, setUrl] = React.useState(defaultUrl);
 
-  return [url, setUrl] as const;
-};
+//   return [url, setUrl] as const;
+// };
 
 const App = (): JSX.Element => {
-  const state = useUser("https://jsonplaceholder.typicode.com/users/1");
-  console.log("state:", state);
+  // const state = useUser("https://jsonplaceholder.typicode.com/users/1");
+  // console.log("state:", state);
+
+  const user = useUser2("https://jsonplaceholder.typicode.com/users/1");
+  console.log("user:", user);
 
   const [book, setBook] = React.useState<BookI | null>(null);
   // console.log("book:", book);
@@ -39,8 +43,8 @@ const App = (): JSX.Element => {
 
   const inputRef = React.useRef<HTMLInputElement>(null);
 
-  const [url] = useUrl("google.com");
-  console.log({ url });
+  // const [url] = useUrl("google.com");
+  // console.log({ url });
 
   React.useEffect(() => {
     if (inputRef.current) {
