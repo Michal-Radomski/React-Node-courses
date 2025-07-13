@@ -7,10 +7,10 @@ import { InlineBundle } from "../InlineBundlePattern";
 import { Layers } from "../LayersPattern";
 import { Grid } from "../GridPattern";
 
-export const Pad = styled.div<{ $padding: string | string[] }>`
+export const Pad = styled.div<{ $padding?: string | string[] }>`
   padding: ${(props) => {
     return ([] as string[])
-      .concat(props.$padding)
+      .concat(props?.$padding as string)
       .map((padKey) => spacingSchema[padKey as keyof typeof spacingSchema])
       .join(" ");
   }};
