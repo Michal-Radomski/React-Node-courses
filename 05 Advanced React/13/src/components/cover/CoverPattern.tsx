@@ -14,7 +14,7 @@ interface CoverProps {
   $minHeight?: string;
 }
 
-const Cover = styled.div.attrs<CoverProps>(({ children, $top, $bottom }) => {
+export const Cover = styled.div.attrs<CoverProps>(({ children, $top, $bottom }) => {
   return {
     children: (
       <React.Fragment>

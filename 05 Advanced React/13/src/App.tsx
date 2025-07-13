@@ -12,10 +12,13 @@ import PadPattern from "./components/pad/PadPattern";
 import CenterPattern from "./components/center/CenterPattern";
 import MediaWrapperPattern from "./components/media-wrapper/MediaWrapperPattern";
 import CoverPattern from "./components/cover/CoverPattern";
+import NewModal from "./ModalExample";
 
 const App = (): JSX.Element => {
   return (
     <React.Fragment>
+      <NewModal />
+      <br />
       <CoverPattern />
       <br />
       <MediaWrapperPattern />

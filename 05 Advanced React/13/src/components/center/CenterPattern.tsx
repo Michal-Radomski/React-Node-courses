@@ -7,7 +7,7 @@ import { Layers } from "../LayersPattern";
 export const Center = styled.div<{
   $maxWidth?: string;
   $centerChildren?: boolean;
-  $centerText: boolean;
+  $centerText?: boolean;
   $gutter?: string;
 }>`
   box-sizing: content-box;
