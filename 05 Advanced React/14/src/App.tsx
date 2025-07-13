@@ -33,8 +33,11 @@ const App = (): JSX.Element => {
   // const state = useUser("https://jsonplaceholder.typicode.com/users/1");
   // console.log("state:", state);
 
-  const user = useUser2("https://jsonplaceholder.typicode.com/users/1");
-  console.log("user:", user);
+  // const user = useUser2("https://jsonplaceholder.typicode.com/users/1");
+  // console.log("user:", user);
+
+  const [status, value] = useUser2("https://jsonplaceholder.typicode.com/users/1");
+  console.log("value:", value);
 
   const [book, setBook] = React.useState<BookI | null>(null);
   // console.log("book:", book);
@@ -60,6 +63,14 @@ const App = (): JSX.Element => {
 
   if (!book) {
     return <Loader />;
+  }
+
+  if (status === "fetching") {
+    return <div>Fetching...</div>;
+  }
+
+  if (status === "error") {
+    return <div>Error: {value.message}</div>;
   }
 
   return (
