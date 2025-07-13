@@ -36,6 +36,7 @@ const ShoppingCard = (): JSX.Element => {
             <input
               type="number"
               value={inputItems}
+              // onChange={(e) => setInputItems(Number(e.target.value))}
               onChange={(e) => setInputItems(e.target.valueAsNumber)}
               className="counter-input"
             />
