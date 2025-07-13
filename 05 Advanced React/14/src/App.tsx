@@ -20,11 +20,31 @@ export const fetchBooks = async (count: number): Promise<BookI[]> => {
   return response.data;
 };
 
+//* Custom hook
+const useUrl = (defaultUrl: string): readonly [string, React.Dispatch<React.SetStateAction<string>>] => {
+  const [url, setUrl] = React.useState(defaultUrl);
+
+  return [url, setUrl] as const;
+};
+
 const App = (): JSX.Element => {
   const [book, setBook] = React.useState<BookI | null>(null);
   // console.log("book:", book);
   // const [count, setCount] = React.useState<number>(4);
   const [books, setBooks] = React.useState<BookI[]>([]);
+
+  const inputRef = React.useRef<HTMLInputElement>(null);
+
+  const [url] = useUrl("google.com");
+  console.log({ url });
+
+  React.useEffect(() => {
+    if (inputRef.current) {
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 500);
+    }
+  }, []);
 
   React.useEffect(() => {
     fetchRandomBook().then(setBook);
@@ -36,6 +56,7 @@ const App = (): JSX.Element => {
 
   return (
     <React.Fragment>
+      <input ref={inputRef} />
       <main className="w-full max-w-2xl py-16 mx-auto">
         <Books
           // count={count}
