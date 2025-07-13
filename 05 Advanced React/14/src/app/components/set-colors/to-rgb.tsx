@@ -21,7 +21,7 @@ const HexToRGB = ({ hexColor, dispatch }: HexToRGBProps): JSX.Element => {
   const color = hex.rgb(hexColor);
   const [r, g, b] = color;
 
-  const updateRGB = ({ red = r, green = g, blue = b }) => {
+  const updateRGB = ({ red = r, green = g, blue = b }): void => {
     dispatch({
       type: "update-rgb",
       payload: { rgb: [red, green, blue] },
