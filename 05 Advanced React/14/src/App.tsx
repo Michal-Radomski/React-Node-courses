@@ -7,6 +7,7 @@ import { BookI } from "./Interfaced";
 import Loader from "./use_state/loader/loader";
 import Book from "./use_state/books/book";
 import Books from "./use_state/books/books";
+import { useUser } from "./useUser";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const fetchRandomBook = async (): Promise<BookI> => {
@@ -28,6 +29,9 @@ const useUrl = (defaultUrl: string): readonly [string, React.Dispatch<React.SetS
 };
 
 const App = (): JSX.Element => {
+  const state = useUser("https://jsonplaceholder.typicode.com/users/1");
+  console.log("state:", state);
+
   const [book, setBook] = React.useState<BookI | null>(null);
   // console.log("book:", book);
   // const [count, setCount] = React.useState<number>(4);
