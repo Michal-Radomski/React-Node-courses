@@ -3,13 +3,14 @@ import React from "react";
 import "./books.scss";
 
 interface BooksI {
-  children: React.ReactNode;
+  // children: React.ReactNode;
   count: number;
   onSubmit: React.FormEventHandler<HTMLFormElement>;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-export const Books = ({ children, count, onChange, onSubmit }: BooksI): JSX.Element => {
+// export const Books = ({ children, count, onChange, onSubmit }: BooksI): JSX.Element => {
+export const Books = ({ children, count, onChange, onSubmit }: React.PropsWithChildren<BooksI>): JSX.Element => {
   return (
     <React.Fragment>
       <section className="book-list gap-8">

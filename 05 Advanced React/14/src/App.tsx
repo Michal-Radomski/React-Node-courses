@@ -23,7 +23,7 @@ export const fetchBooks = async (count: number): Promise<BookI[]> => {
 const App = (): JSX.Element => {
   const [book, setBook] = React.useState<BookI | null>(null);
   // console.log("book:", book);
-  const [count, setCount] = React.useState(10);
+  const [count, setCount] = React.useState(4);
   const [books, setBooks] = React.useState<BookI[]>([]);
 
   React.useEffect(() => {
