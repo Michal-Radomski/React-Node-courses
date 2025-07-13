@@ -9,10 +9,13 @@ import AttrsExample from "./AttrsExample";
 import InlineBundlePattern from "./components/InlineBundlePattern";
 import InlinePattern from "./components/inline/InlinePattern";
 import PadPattern from "./components/pad/PadPattern";
+import CenterPattern from "./components/center/CenterPattern";
 
 const App = (): JSX.Element => {
   return (
     <React.Fragment>
+      <CenterPattern />
+      <br />
       <PadPattern />
       <br />
       <InlinePattern />
