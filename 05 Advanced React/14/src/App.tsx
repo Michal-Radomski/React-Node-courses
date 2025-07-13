@@ -23,7 +23,7 @@ export const fetchBooks = async (count: number): Promise<BookI[]> => {
 const App = (): JSX.Element => {
   const [book, setBook] = React.useState<BookI | null>(null);
   // console.log("book:", book);
-  const [count, setCount] = React.useState(4);
+  // const [count, setCount] = React.useState<number>(4);
   const [books, setBooks] = React.useState<BookI[]>([]);
 
   React.useEffect(() => {
@@ -38,9 +38,10 @@ const App = (): JSX.Element => {
     <React.Fragment>
       <main className="w-full max-w-2xl py-16 mx-auto">
         <Books
-          count={count}
-          onChange={(e) => setCount(e.target.valueAsNumber)}
-          onSubmit={() => fetchBooks(count).then(setBooks)}
+          // count={count}
+          // onChange={(e) => setCount(e.target.valueAsNumber)}
+          // onSubmit={() => fetchBooks(count).then(setBooks)}
+          setBooks={setBooks}
         >
           {books.map((book: BookI, index: number) => {
             return <Book title={book.title} author={book.author} key={index} />;
