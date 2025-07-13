@@ -5,10 +5,10 @@ import { Extras } from "./Components";
 import { Layers } from "../LayersPattern";
 
 export const Center = styled.div<{
-  $maxWidth: string;
-  $centerChildren: boolean;
+  $maxWidth?: string;
+  $centerChildren?: boolean;
   $centerText: boolean;
-  $gutter: string;
+  $gutter?: string;
 }>`
   box-sizing: content-box;
   margin-inline-start: auto;

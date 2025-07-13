@@ -10,10 +10,13 @@ import InlineBundlePattern from "./components/InlineBundlePattern";
 import InlinePattern from "./components/inline/InlinePattern";
 import PadPattern from "./components/pad/PadPattern";
 import CenterPattern from "./components/center/CenterPattern";
+import MediaWrapperPattern from "./components/media-wrapper/MediaWrapperPattern";
 
 const App = (): JSX.Element => {
   return (
     <React.Fragment>
+      <MediaWrapperPattern />
+      <br />
       <CenterPattern />
       <br />
       <PadPattern />
