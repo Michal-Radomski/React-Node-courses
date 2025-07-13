@@ -2,6 +2,7 @@ import React from "react"; // Importing MouseEventHandler from React
 
 import Button from "../common/button"; // Importing the Button component
 import ColorChangeSwatch from "../common/color-change-swatch"; // Importing the ColorChangeSwatch component
+import { ColorActions } from "../../reducer/color-reducer";
 
 // Inline CSS styles for the container element
 const containerStyle = {
@@ -17,9 +18,10 @@ type SavedColorProps = {
   hexColor: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   onRemove?: () => void;
+  dispatch: React.Dispatch<ColorActions>;
 };
 
-const SavedColor = ({ name, hexColor, onClick, onRemove }: SavedColorProps): JSX.Element => {
+const SavedColor = ({ name, hexColor, onRemove, dispatch }: SavedColorProps): JSX.Element => {
   return (
     <React.Fragment>
       <article style={containerStyle}>
@@ -28,7 +30,13 @@ const SavedColor = ({ name, hexColor, onClick, onRemove }: SavedColorProps): JSX
           Delete
         </Button>
         {/* ColorChangeSwatch component to display the saved color */}
-        <ColorChangeSwatch hexColor={hexColor} colorName={name} onClick={onClick} />
+        <ColorChangeSwatch
+          hexColor={hexColor}
+          colorName={name}
+          onClick={() => {
+            dispatch({ type: "update-hex", payload: { hexColor } });
+          }}
+        />
       </article>
     </React.Fragment>
   );

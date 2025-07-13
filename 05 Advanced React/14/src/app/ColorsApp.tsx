@@ -19,7 +19,7 @@ function ColorsApp(): JSX.Element {
         />
         <SetColors dispatch={dispatch} hexColor={hexColor} />
         <ColorGroups hexColor={hexColor} />
-        <SavedColors hexColor={hexColor} />
+        <SavedColors hexColor={hexColor} dispatch={dispatch} />
       </div>
     </React.Fragment>
   );
