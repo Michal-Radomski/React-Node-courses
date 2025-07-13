@@ -8,19 +8,19 @@ import Loader from "./use_state/loader/loader";
 import Book from "./use_state/books/book";
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const fetchRandomBook = async () => {
+export const fetchRandomBook = async (): Promise<BookI> => {
   const response = await axios.get(`/api/books/random`);
   return response.data;
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const fetchBook = async (count: number) => {
+export const fetchBook = async (count: number): Promise<BookI> => {
   const response = await axios.get(`/api/books?limit=${count}`);
   return response.data;
 };
 
 const App = (): JSX.Element => {
-  const [book, setBook] = React.useState<BookI | undefined>(undefined);
+  const [book, setBook] = React.useState<BookI | null>(null);
   // console.log("book:", book);
 
   React.useEffect(() => {
