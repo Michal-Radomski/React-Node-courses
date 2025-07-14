@@ -2,7 +2,8 @@ import React from "react";
 import clsx from "clsx"; // Importing clsx library for combining class names
 
 import Button from "./button"; // Importing the Button component
-import { ColorContext } from "../../context/context";
+// import { ColorContext } from "../../context/context";
+import { useContext } from "../../context/context";
 
 type ColorChangeSwatchProps = {
   hexColor: string;
@@ -13,7 +14,8 @@ type ColorChangeSwatchProps = {
 
 // Todo: fix this/parent component?
 const ColorChangeSwatch = ({ hexColor, colorName, className }: ColorChangeSwatchProps): JSX.Element => {
-  const { dispatch } = React.useContext(ColorContext);
+  // const { dispatch } = React.useContext(ColorContext);
+  const { dispatch } = useContext();
 
   return (
     <React.Fragment>
