@@ -2,6 +2,7 @@ import React from "react";
 import clsx from "clsx"; // Importing clsx library for combining class names
 
 import Button from "./button"; // Importing the Button component
+import { ColorContext } from "../../context/context";
 
 type ColorChangeSwatchProps = {
   hexColor: string;
@@ -10,7 +11,10 @@ type ColorChangeSwatchProps = {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-const ColorChangeSwatch = ({ hexColor, colorName, className, onClick }: ColorChangeSwatchProps): JSX.Element => {
+// Todo: fix this/parent component?
+const ColorChangeSwatch = ({ hexColor, colorName, className }: ColorChangeSwatchProps): JSX.Element => {
+  const { dispatch } = React.useContext(ColorContext);
+
   return (
     <React.Fragment>
       <Button
@@ -22,7 +26,8 @@ const ColorChangeSwatch = ({ hexColor, colorName, className, onClick }: ColorCha
           height: "100%",
           maxHeight: "43px",
         }}
-        onClick={onClick} // Pass the onClick event handler to the Button component
+        // onClick={onClick} // Pass the onClick event handler to the Button component
+        onClick={() => dispatch({ type: "update-hex", payload: { hexColor } })} // Pass the onClick event handler to the Button component
       >
         {/* Display the colorName and hexColor */}
         {colorName}

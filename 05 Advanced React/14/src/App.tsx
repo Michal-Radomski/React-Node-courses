@@ -11,6 +11,7 @@ import Books from "./use_state/books/books";
 import { useUser2 } from "./useUser2";
 import ShoppingCard2 from "./reducer/shopping-card";
 import ColorsApp from "./app/ColorsApp";
+import { ColorProvider } from "./app/context/context";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const fetchRandomBook = async (): Promise<BookI> => {
@@ -77,7 +78,10 @@ const App = (): JSX.Element => {
 
   return (
     <React.Fragment>
-      <ColorsApp />
+      <ColorProvider>
+        <ColorsApp />
+      </ColorProvider>
+
       <br />
 
       <ShoppingCard2 />
