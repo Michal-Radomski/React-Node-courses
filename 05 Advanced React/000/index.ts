@@ -158,3 +158,25 @@ const userDesc: UserDescriptions = {
   activeDescription: "Whether the user is active or not",
 };
 console.log(userDesc);
+
+type Linked<T> = {
+  value: T;
+  next?: Linked<T>;
+};
+
+const textLinked: Linked<string> = {
+  value: "string",
+  next: {
+    value: "string2",
+  },
+};
+
+const buildLink = <T>(value: T): Linked<T> => {
+  return { value };
+};
+
+const test2 = buildLink("link");
+console.log({ test2 });
+
+const test3 = buildLink(3);
+console.log({ test3 });
