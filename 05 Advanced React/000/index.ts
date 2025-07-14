@@ -1,3 +1,5 @@
+//* keyof / typeof
+
 export {};
 type ObjectType = {
   key1: 1;
@@ -70,15 +72,15 @@ const person = {
 
 // Using typeof to get the type of the 'person' object
 type PersonType = typeof person;
-// type PersonType = {
-//     name: string;
-//     age: number;
-//     location: string;
-// }
+//^ type PersonType = {
+//^     name: string;
+//^     age: number;
+//^     location: string;
+//^ }
 
 // Using keyof to get a union type of the keys of PersonType
 type PersonKeys = keyof PersonType; // "name" | "age" | "location"
-// type PersonKeys = "name" | "age" | "location"
+//^ type PersonKeys = "name" | "age" | "location"
 
 type Test = keyof typeof person; //^ "name" | "age" | "location"
 
@@ -124,3 +126,35 @@ console.log(greetings);
 //   'Hello, your email is donald.duck@example.com',
 //   'Hello, your role is admin'
 // ]
+
+//* Generics
+// A generic type that takes a type T and creates a new type with a property
+// whose name is a template literal based on the keys of T
+type PropertyDescription<T> = {
+  // For each key K in T (which must be a string), create a property
+  // with key `${K}Description` and type string
+  [K in keyof T as `${string & K}Description`]: string;
+};
+
+// Example type
+type User = {
+  name: string;
+  age: number;
+  active: boolean;
+};
+
+// Using the generic type with User
+type UserDescriptions = PropertyDescription<User>;
+// type UserDescriptions = {
+//     nameDescription: string;
+//     ageDescription: string;
+//     activeDescription: string;
+// }
+
+// Example usage
+const userDesc: UserDescriptions = {
+  nameDescription: "The user's full name",
+  ageDescription: "The user's age in years",
+  activeDescription: "Whether the user is active or not",
+};
+console.log(userDesc);
