@@ -1,8 +1,12 @@
 import { ChangeEventHandler } from "react";
 
-type TightProps<T> = T | OptionalUndefined<T>;
+// type TightProps<T> = T | OptionalUndefined<T>;
 
-type OptionalUndefined<T> = Partial<Record<keyof T, undefined>>;
+// type OptionalUndefined<T> = Partial<Record<keyof T, undefined>>;
+
+type TightProps<T extends object> = T | OptionalUndefined<T>;
+
+type OptionalUndefined<T extends object> = Partial<Record<keyof T, undefined>>;
 
 type InputProps = TightProps<{
   value: string;
