@@ -5,10 +5,12 @@ import ColorSelect from "./components/color-selector";
 import SetColors from "./components/set-colors";
 import ColorGroups from "./components/color-group";
 import SavedColors from "./components/saved-colors";
-import { colorReducer, initState } from "./reducer/color-reducer";
+import { ColorContext } from "./context/context";
+// import { colorReducer, initState } from "./reducer/color-reducer";
 
 function ColorsApp(): JSX.Element {
-  const [{ hexColor }, dispatch] = React.useReducer(colorReducer, initState);
+  // const [{ hexColor }, dispatch] = React.useReducer(colorReducer, initState);
+  const { hexColor, dispatch } = React.useContext(ColorContext);
 
   return (
     <React.Fragment>
