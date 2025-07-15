@@ -28,6 +28,12 @@ const products = [
   },
 ];
 
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+}
+
 const Exercises = (): JSX.Element => {
   const example = useStateObject<{ name: string }>({ name: "CodeLicks" });
   console.log({ example });
@@ -40,6 +46,18 @@ const Exercises = (): JSX.Element => {
           rows={products}
           renderRow={(row) => {
             return <li>{row.id}</li>;
+          }}
+        ></ProductList>
+      </div>
+
+      <div>
+        <ProductList<Product>
+          rows={[
+            { id: 1, title: "blabla", price: 99 },
+            { id: 2, title: "blabla2", price: 29 },
+          ]}
+          renderRow={(row) => {
+            return <li>{row.title}</li>;
           }}
         ></ProductList>
       </div>
