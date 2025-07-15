@@ -180,3 +180,15 @@ console.log({ test2 });
 
 const test3 = buildLink(3);
 console.log({ test3 });
+
+// Overload signatures
+function add(a: string, b: string): string;
+function add(a: number, b: number): number;
+
+// Implementation signature
+function add(a: any, b: any): any {
+  return a + b;
+}
+
+console.log(add("Hello, ", "world!")); // returns "Hello, world!"
+console.log(add(10, 20)); // returns 30
