@@ -1,3 +1,5 @@
+//* Partial -> all optional, Required -> all required!
+
 //* keyof / typeof
 
 export {};
