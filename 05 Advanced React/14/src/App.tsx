@@ -13,6 +13,7 @@ import ShoppingCard2 from "./reducer/shopping-card";
 import ColorsApp from "./app/ColorsApp";
 import { ColorProvider } from "./app/context/context";
 import Input from "./type_helper/input";
+import Exercises from "./exercises/Exercises";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const fetchRandomBook = async (): Promise<BookI> => {
@@ -97,19 +98,19 @@ const App = (): JSX.Element => {
 
   return (
     <React.Fragment>
-      <>
+      <Exercises />
+      <br />
+      <React.Fragment>
         <Input label="Name" value="Codelicks" onChange={() => {}} />
         <Input label="Name" />
         {/* <Input label="Name" value="Codelicks" />
       <Input label="Name" onChange={() => {}} /> */}
-      </>
-
+      </React.Fragment>
+      <br />
       <ColorProvider>
         <ColorsApp />
       </ColorProvider>
-
       <br />
-
       <ShoppingCard2 />
 
       <input ref={inputRef} />
