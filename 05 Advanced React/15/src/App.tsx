@@ -7,6 +7,7 @@ import "./App.scss";
 import { useMousePosition } from "./components/custom-hook/useMousePosition";
 import RenderPropsComponent from "./RenderPropsComponent";
 import { Button } from "./components/button";
+import TextPan from "./components/TextPan";
 // import MousePosition from "./components/position";
 
 // const DisplayMousePos = ({ x, y }: { x: number; y: number }): JSX.Element => (
@@ -23,11 +24,26 @@ import { Button } from "./components/button";
 // );
 
 const App = (): JSX.Element => {
+  const [expanded, setExpanded] = React.useState<boolean>(false);
+  const dummyText: string =
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed hendrerit diam ac odio iaculis, ut volutpat odio ullamcorper. Nulla bibendum malesuada elit, nec gravida urna tincidunt eu. Nulla id tincidunt ligula. Curabitur eget odio ut nisi ullamcorper cursus eu at tortor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam a fringilla nulla. Vivamus et convallis libero. Cras id augue eu velit mattis fringilla vel nec nunc. Sed fringilla ex sit amet quam consequat, in laoreet dui interdum. Sed eget ex eu dolor condimentum interdum. Duis sit amet tincidunt turpis. Sed sed risus sed arcu tristique iaculis vel et metus. Suspendisse potenti. Aliquam non metus a mi cursus lacinia.";
+
   // const Wrapper = withMouseMove(DisplayMousePosition);
   const { x, y, onMouseMove } = useMousePosition();
 
   return (
     <React.Fragment>
+      <div className="container">
+        <TextPan short expanded={expanded}>
+          {dummyText}
+        </TextPan>
+        <section style={{ marginTop: "1em" }}>
+          <button className={expanded ? "secondary" : "primary"} onClick={() => setExpanded(!expanded)}>
+            {expanded ? "Shorten" : "Expand"}
+          </button>
+        </section>
+      </div>
+
       <div className="container">
         <Button primary>Primary Button</Button>
         <Button secondary>Secondary Button</Button>
