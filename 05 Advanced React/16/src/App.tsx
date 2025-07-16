@@ -19,10 +19,10 @@ const App = (): JSX.Element => {
       <Button children="Button" type={undefined} onClick={() => console.log("onClick")} />
 
       <main>
-        <Card>
+        <Card color="crimson">
           Welcome to a custom component!
           <p>Inside, we can have various elements.</p>
-          <Card>
+          <Card color="brown">
             <h2>Another custom component within.</h2>
           </Card>
           <Card>
