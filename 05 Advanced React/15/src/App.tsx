@@ -10,6 +10,7 @@ import { Button } from "./components/button";
 import TextPan from "./components/TextPan";
 import DisplayBooks from "./components/render-props2/display-books";
 import WrapperComponent from "./components/wrapper-component/wrapper-component";
+import PolymorphicComponent from "./components/polymorphic/polymorphic-component";
 // import MousePosition from "./components/position";
 
 // const DisplayMousePos = ({ x, y }: { x: number; y: number }): JSX.Element => (
@@ -35,6 +36,8 @@ const App = (): JSX.Element => {
 
   return (
     <React.Fragment>
+      <PolymorphicComponent />
+      <br />
       <WrapperComponent />
       <br />
       <DisplayBooks />
