@@ -9,6 +9,7 @@ import RenderPropsComponent from "./RenderPropsComponent";
 import { Button } from "./components/button";
 import TextPan from "./components/TextPan";
 import DisplayBooks from "./components/render-props2/display-books";
+import WrapperComponent from "./components/wrapper-component/wrapper-component";
 // import MousePosition from "./components/position";
 
 // const DisplayMousePos = ({ x, y }: { x: number; y: number }): JSX.Element => (
@@ -34,8 +35,9 @@ const App = (): JSX.Element => {
 
   return (
     <React.Fragment>
+      <WrapperComponent />
+      <br />
       <DisplayBooks />
-
       <br />
 
       <div className="container">
