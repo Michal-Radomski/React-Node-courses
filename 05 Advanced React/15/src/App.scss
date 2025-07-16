@@ -57,3 +57,21 @@ body {
 .paragraph {
   margin: 0;
 }
+
+/* Primary style */
+.primary {
+  background-color: tomato;
+}
+
+.primary:hover {
+  background-color: orangered;
+}
+
+/* Secondary style */
+.secondary {
+  background-color: cornflowerblue;
+}
+
+.secondary:hover {
+  background-color: dodgerblue;
+}

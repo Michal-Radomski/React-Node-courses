@@ -6,6 +6,7 @@ import "./App.scss";
 // import { RenderMousePosition } from "./components/render-props/RenderMouse";
 import { useMousePosition } from "./components/custom-hook/useMousePosition";
 import RenderPropsComponent from "./RenderPropsComponent";
+import { Button } from "./components/button";
 // import MousePosition from "./components/position";
 
 // const DisplayMousePos = ({ x, y }: { x: number; y: number }): JSX.Element => (
@@ -27,6 +28,11 @@ const App = (): JSX.Element => {
 
   return (
     <React.Fragment>
+      <div className="container">
+        <Button primary>Primary Button</Button>
+        <Button secondary>Secondary Button</Button>
+      </div>
+
       <RenderPropsComponent />
 
       <div className="container">
