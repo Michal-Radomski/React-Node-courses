@@ -8,6 +8,7 @@ import { useMousePosition } from "./components/custom-hook/useMousePosition";
 import RenderPropsComponent from "./RenderPropsComponent";
 import { Button } from "./components/button";
 import TextPan from "./components/TextPan";
+import DisplayBooks from "./components/render-props2/display-books";
 // import MousePosition from "./components/position";
 
 // const DisplayMousePos = ({ x, y }: { x: number; y: number }): JSX.Element => (
@@ -33,6 +34,10 @@ const App = (): JSX.Element => {
 
   return (
     <React.Fragment>
+      <DisplayBooks />
+
+      <br />
+
       <div className="container">
         <TextPan short expanded={expanded}>
           {dummyText}
