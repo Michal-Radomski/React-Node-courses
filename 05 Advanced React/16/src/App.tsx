@@ -7,6 +7,13 @@ import Card from "./components/button/card";
 import { Button } from "./components/button/button";
 import Alert from "./components/alert";
 import Alert2 from "./components/alert2";
+import Profile from "./components/profile";
+
+const Component = (props: { data: Record<string, never> }): JSX.Element => {
+  console.log("props:", props);
+
+  return <div />;
+};
 
 const App = (): JSX.Element => {
   const [inputName, setInputName] = React.useState<string>("");
@@ -18,6 +25,15 @@ const App = (): JSX.Element => {
 
   return (
     <React.Fragment>
+      <Component data={{}} />
+
+      <div>
+        <Profile showLinkedin linkedinId="test-lnk" />
+        <Profile githubId="test-gth" />
+        <Profile githubId="test-gth" />
+        <Profile showLinkedin linkedinId="test-lnk" />
+      </div>
+
       <div>
         <Alert2 variant="with-code" code="101" btnColor="crimson" />
         <Alert2 variant="no-code" btnColor="crimson" />
