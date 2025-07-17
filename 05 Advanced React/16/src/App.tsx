@@ -5,6 +5,8 @@ import ClassInfo from "./components/class-info/class-info";
 import Dashboard from "./components/settings/settings";
 import Card from "./components/button/card";
 import { Button } from "./components/button/button";
+import Alert from "./components/alert";
+import Alert2 from "./components/alert2";
 
 const App = (): JSX.Element => {
   const [inputName, setInputName] = React.useState<string>("");
@@ -16,6 +18,17 @@ const App = (): JSX.Element => {
 
   return (
     <React.Fragment>
+      <div>
+        <Alert2 variant="with-code" code="101" btnColor="crimson" />
+        <Alert2 variant="no-code" btnColor="crimson" />
+      </div>
+
+      <div>
+        <Alert variant="with-code" code="101" />
+        <Alert variant="no-code" />
+        <Alert variant="no-code" />
+      </div>
+
       <Button children="Button" type={undefined} onClick={() => console.log("onClick")} />
 
       <main>
