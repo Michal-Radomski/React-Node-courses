@@ -16,7 +16,7 @@ const buttonProps = {
     type: "button",
     // notAllowedProperty: "anything", //* Error
   },
-} satisfies Record<string, React.ComponentProps<"button">>;
+} satisfies Record<string, React.ComponentProps<"button">>; //* Record -> key - value object
 
 type ButtonProps = {
   variant: keyof typeof buttonProps;
