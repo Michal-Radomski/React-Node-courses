@@ -10,6 +10,8 @@ import Alert2 from "./components/alert2";
 import Profile from "./components/profile";
 import Input from "./components/input";
 import Rows from "./components/rows";
+import Button2 from "./components/button2";
+import Label from "./components/label";
 
 const Component = (props: { data: Record<string, never> }): JSX.Element => {
   console.log("props:", props);
@@ -27,6 +29,16 @@ const App = (): JSX.Element => {
 
   return (
     <React.Fragment>
+      <Label space="l" />
+      <Label space="x" />
+
+      <React.Fragment>
+        <Button2 variant="primary"></Button2>
+        <Button2 variant="secondary"></Button2>
+        <Button2 variant="tertiary"></Button2>
+        <Button2 variant="danger"></Button2>
+      </React.Fragment>
+
       <React.Fragment>
         <Rows
           renderRow={(index: number) => {
