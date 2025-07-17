@@ -12,12 +12,34 @@ import Input from "./components/input";
 import Rows from "./components/rows";
 import Button2 from "./components/button2";
 import Label from "./components/label";
+import Button3 from "./components/buttons";
 
 const Component = (props: { data: Record<string, never> }): JSX.Element => {
   console.log("props:", props);
 
   return <div />;
 };
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const BUTTON_TYPES = {
+  0: "warning",
+  1: "success",
+  2: "error",
+} as const;
+
+type ButtonTypes = typeof BUTTON_TYPES;
+// {
+//   0: "warning",
+//   1: "success",
+//   2: "error",
+// }
+
+type TypesKeys = keyof ButtonTypes; //*  0 | 2 | 1
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type TypesValues = ButtonTypes[TypesKeys]; //* "warning" | "success" | "error"
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type Types = keyof typeof BUTTON_TYPES; //* 0 | 2 | 1
 
 const App = (): JSX.Element => {
   const [inputName, setInputName] = React.useState<string>("");
@@ -29,6 +51,14 @@ const App = (): JSX.Element => {
 
   return (
     <React.Fragment>
+      <React.Fragment>
+        <Button3 variant="reset"></Button3>
+        <Button3 variant="submit"></Button3>
+        <Button3 variant="skip"></Button3>
+        {/* Error */}
+        {/* <Button3 variant="blabla"></Button3> */}
+      </React.Fragment>
+
       <Label space="l" />
       <Label space="x" />
 
