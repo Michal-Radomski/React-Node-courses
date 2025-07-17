@@ -8,6 +8,8 @@ import { Button } from "./components/button/button";
 import Alert from "./components/alert";
 import Alert2 from "./components/alert2";
 import Profile from "./components/profile";
+import Input from "./components/input";
+import Rows from "./components/rows";
 
 const Component = (props: { data: Record<string, never> }): JSX.Element => {
   console.log("props:", props);
@@ -25,6 +27,29 @@ const App = (): JSX.Element => {
 
   return (
     <React.Fragment>
+      <React.Fragment>
+        <Rows
+          renderRow={(index: number) => {
+            return <div key={index}>{index}</div>;
+          }}
+        />
+        <Rows
+          renderRow={(index) => {
+            return index;
+          }}
+        />
+        <Rows
+          renderRow={(index) => {
+            console.log("index:", index);
+            return null;
+          }}
+        />
+      </React.Fragment>
+
+      <React.Fragment>
+        <Input label="Name" value="Codelicks" onChange={() => {}} />
+        <Input label="Name" />
+      </React.Fragment>
       <Component data={{}} />
 
       <div>
