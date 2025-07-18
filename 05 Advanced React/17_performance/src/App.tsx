@@ -8,6 +8,7 @@ import { NewBtn } from "./NewBtn";
 import { Info } from "./info";
 import "./App.scss";
 
+//* Lazy load: must be default exported!
 const NewStarModal = React.lazy(() => import("./components/modal/NewStarModal"));
 
 const ModalLoader = (): JSX.Element => <div className="modal-loader">Loading...</div>;
@@ -116,6 +117,7 @@ const App = (): JSX.Element => {
 
         {/* //* Change the onClick prop to a memoized prop */}
         <NewBtn onClick={showDialog} />
+
         {isAddOpen ? (
           <React.Suspense fallback={<ModalLoader />}>
             <NewStarModal

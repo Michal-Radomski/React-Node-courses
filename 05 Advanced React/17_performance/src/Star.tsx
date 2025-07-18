@@ -37,7 +37,7 @@ const StarComponent = function StarComponent(props: Props): JSX.Element {
   );
 };
 
-const comparison = (prevProps: { Star: StarI }, nextProps: { Star: StarI }) => {
+const comparison = (prevProps: { Star: StarI }, nextProps: { Star: StarI }): boolean => {
   return (
     prevProps.Star.id === nextProps.Star.id &&
     prevProps.Star.position?.left === nextProps.Star.position?.left &&
