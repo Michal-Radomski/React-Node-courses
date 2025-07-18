@@ -58,7 +58,7 @@ const App = (): JSX.Element => {
   const { height, width } = boardSize;
 
   //use useCallback hook to memoize a function
-  const showDialog = React.useCallback(() => setIsAddOpen(true), []);
+  const showDialog: () => void = React.useCallback(() => setIsAddOpen(true), []);
 
   React.useEffect(() => {
     if (height && width) {

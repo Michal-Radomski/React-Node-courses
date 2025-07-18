@@ -1,6 +1,6 @@
 import React from "react";
 
-//use React.memo() to only render if the ref. of props change
+// Use React.memo() to only render if the ref. of props change (equivalent of React.PureComponent)
 export const NewBtn = React.memo(function NewBtn({ onClick }: { onClick: () => void }): JSX.Element {
   return (
     <React.Fragment>
