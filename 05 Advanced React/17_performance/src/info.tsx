@@ -1,12 +1,14 @@
-import React, { useMemo, useState } from "react";
+import React from "react";
+
 import { randomExpensiveOperation } from "./utils/expensive-operation";
 
 export const Info = React.memo(
-  function Info(props) {
-    const [exapnded, setExpanded] = useState(false);
+  function Info(props: { Stars: { [key: string]: StarI } }) {
+    const [expanded, setExpanded] = React.useState<boolean>(false);
+
     const Stars = Object.values(props.Stars);
 
-    const distances = useMemo(() => {
+    const distances = React.useMemo(() => {
       const distancesCalc = { max: 0, min: 1000 };
       Stars.forEach((currentStar) => {
         randomExpensiveOperation();
@@ -15,23 +17,17 @@ export const Info = React.memo(
             return;
           }
 
-          distancesCalc.max = Math.max(
-            distancesCalc.max,
-            Math.max(Number(currentStar.age), Number(compareStar.age))
-          );
-          distancesCalc.min = Math.min(
-            distancesCalc.min,
-            Math.min(Number(currentStar.age), Number(compareStar.age))
-          );
+          distancesCalc.max = Math.max(distancesCalc.max, Math.max(Number(currentStar.age), Number(compareStar.age)));
+          distancesCalc.min = Math.min(distancesCalc.min, Math.min(Number(currentStar.age), Number(compareStar.age)));
         });
       });
       return distancesCalc;
-    }, [Object.keys(Stars).length]);
+    }, [Stars]);
 
-    const expandHandler = () => setExpanded(!exapnded);
+    const expandHandler = () => setExpanded(!expanded);
 
     return (
-      <div className={exapnded ? "bar" : "board"}>
+      <div className={expanded ? "bar" : "board"}>
         <div>You have {Object.keys(props.Stars).length} stars!</div>
         <div>Age of the oldest star: {distances.max}</div>
         <div>Age of the youngest star: {distances.min}</div>
@@ -42,9 +38,6 @@ export const Info = React.memo(
     );
   },
   (prevProps, nextProps) => {
-    return (
-      Object.keys(prevProps.Stars).length ===
-      Object.keys(nextProps.Stars).length
-    );
+    return Object.keys(prevProps.Stars).length === Object.keys(nextProps.Stars).length;
   }
 );

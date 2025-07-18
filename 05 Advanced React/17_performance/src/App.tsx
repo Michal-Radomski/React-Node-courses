@@ -1,17 +1,18 @@
-import React, { useRef, useState, useEffect, useCallback, lazy, Suspense } from "react";
-
-import useComponentSize from "@rehooks/component-size";
-import StarData from "./data.json";
+import React from "react";
+import useComponentSize, { type ComponentSize } from "@rehooks/component-size";
 import { v4 as uuidv4 } from "uuid";
+
+import StarData from "./data.json";
 import StarComponent from "./Star";
 import { NewBtn } from "./NewBtn";
 import { Info } from "./info";
+import "./App.scss";
 
-const NewStarModal = lazy(() => import("./components/modal/NewStarModal"));
+const NewStarModal = React.lazy(() => import("./components/modal/NewStarModal"));
 
-const ModalLoader = () => <div className="modal-loader">Loading...</div>;
+const ModalLoader = (): JSX.Element => <div className="modal-loader">Loading...</div>;
 
-function positionStars(Stars, width, height) {
+function positionStars(Stars: { [key: string]: StarI }, width: number, height: number): void {
   Object.values(Stars).forEach(
     (Star) =>
       (Star.position = {
@@ -21,8 +22,8 @@ function positionStars(Stars, width, height) {
   );
 }
 
-function parseData() {
-  const Stars = {};
+function parseData(): { [key: string]: StarI } {
+  const Stars = {} as { [key: string]: StarI };
 
   StarData.forEach((task) => {
     Stars[task.id] = task;
@@ -31,8 +32,8 @@ function parseData() {
   return Stars;
 }
 
-function addStar(Stars, age) {
-  const id = uuidv4();
+function addStar(Stars: { [key: string]: StarI }, age: string) {
+  const id: string = uuidv4();
 
   return {
     ...Stars,
@@ -47,39 +48,38 @@ function addStar(Stars, age) {
   };
 }
 
-import "./App.scss";
-
 const App = (): JSX.Element => {
-  const [Stars, setStars] = useState({});
-  const [dragStarInfo, setDragStarInfo] = useState(null);
-  const [isAddOpen, setIsAddOpen] = useState(false);
-  const boardRef = useRef(null);
-  const boardSize = useComponentSize(boardRef);
+  const [Stars, setStars] = React.useState<{ [key: string]: StarI }>({});
+  const [dragStarInfo, setDragStarInfo] = React.useState<{ Star: StarI; dragOffset: { x: number; y: number } } | null>(null);
+  const [isAddOpen, setIsAddOpen] = React.useState<boolean>(false);
+
+  const boardRef = React.useRef<HTMLDivElement>(null);
+  const boardSize: ComponentSize = useComponentSize(boardRef);
   const { height, width } = boardSize;
 
   //use useCallback hook to memoize a function
-  const showDialog = useCallback(() => setIsAddOpen(true), []);
+  const showDialog = React.useCallback(() => setIsAddOpen(true), []);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (height && width) {
-      const parsedStars = parseData();
+      const parsedStars: { [key: string]: StarI } = parseData();
       positionStars(parsedStars, width, height);
       setStars({ ...parsedStars });
     }
   }, [height, width]);
 
-  function handleDelete(Star) {
+  function handleDelete(Star: StarI): void {
     const tempStars = { ...Stars };
     delete tempStars[Star.id];
     setStars(tempStars);
   }
 
-  const StarEls = Object.values(Stars).map((Star) => (
+  const StarEls: JSX.Element[] = Object.values(Stars).map((Star: StarI) => (
     <StarComponent
-      Star={Star}
+      Star={Star as StarI}
       boardSize={boardSize}
       key={Star.id}
-      onDragStart={(dragOffset) => setDragStarInfo({ Star, dragOffset })}
+      onDragStart={(dragOffset: { x: number; y: number }) => setDragStarInfo({ Star, dragOffset })}
       onDragEnd={() => setDragStarInfo(null)}
       onDoubleClick={() => handleDelete(Star)}
     />
@@ -97,7 +97,7 @@ const App = (): JSX.Element => {
 
           const { Star, dragOffset } = dragStarInfo;
 
-          let newStar = {};
+          const newStar = {} as StarI;
           newStar.id = Star.id;
           newStar.age = Star.age;
           newStar.offset = Star.offset;
@@ -113,21 +113,22 @@ const App = (): JSX.Element => {
       >
         {StarEls}
         <Info Stars={Stars} />
-        {/* change the onClick prop to a memoized prop */}
+
+        {/* //* Change the onClick prop to a memoized prop */}
         <NewBtn onClick={showDialog} />
-        {isAddOpen && (
-          <Suspense fallback={<ModalLoader />}>
+        {isAddOpen ? (
+          <React.Suspense fallback={<ModalLoader />}>
             <NewStarModal
               isOpen={isAddOpen}
               onClose={() => setIsAddOpen(false)}
-              onAdd={(StarText) => {
+              onAdd={(StarText: string) => {
                 addStar(Stars, StarText);
                 positionStars(Stars, width, height);
                 setStars(Stars);
               }}
             />
-          </Suspense>
-        )}
+          </React.Suspense>
+        ) : null}
       </div>
     </React.Fragment>
   );
